@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+.movingBlock
+{
+width:50px;
+height:50px;
+background:red;
+position:relative;
+animation:movingBlock 5s linear 2s infinite alternate;
+/* Safari and Chrome: */
+-webkit-animation:movingBlock 5s linear 2s infinite alternate;
+
+-webkit-transform: translate3d(0, 0, 0);
+}
+
+@keyframes movingBlock
+{
+0%   {background:red; left:0px; top:0px;}
+25%  {background:yellow; left:600px; top:0px;}
+50%  {background:blue; left:600px; top:400px;}
+75%  {background:green; left:0px; top:400px;}
+100% {background:red; left:0px; top:0px;}
+}
+
+@-webkit-keyframes movingBlock /* Safari and Chrome */
+{
+0%   {background:red; left:0px; top:0px;}
+25%  {background:yellow; left:600px; top:0px;}
+50%  {background:blue; left:600px; top:400px;}
+75%  {background:green; left:0px; top:400px;}
+100% {background:red; left:0px; top:0px;}
+}
+
+</style>
+</head>
+<body>
+
+<p><b>Note:</b> This example does not work in Internet Explorer 9 and earlier versions.</p>
+<script type="text/javascript">
+for(i=0 ; i<7 ; i++){
+var msgContainer = document.createElement('div');
+msgContainer.className = 'movingBlock'; 
+document.body.appendChild(msgContainer);
+document.body.appendChild(document.createElement('br'));
+}
+</script>
+
+</body>
+</html>
