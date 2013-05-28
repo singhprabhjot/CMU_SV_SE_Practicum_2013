@@ -1,0 +1,70 @@
+/* keyframes definition for WebKit browsers */
+
+@-webkit-keyframes travel2 {
+  from { }
+  to {
+    left: 100%;
+    margin-left: -50px;
+
+    /* Force GPU acceleration*/
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+}
+
+@-webkit-keyframes bounce2 {
+  from { }
+  to {
+    bottom: 100%;
+    margin-bottom: -50px;
+    
+    /* Force GPU acceleration*/
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+}
+
+/* styles for the stage and animated elements */
+
+.stage2 {
+  position: relative;
+  margin: 1em 0;
+  width: 544px;
+  height: 320px;
+  box-shadow: inset 0 0 20px #fff;
+  background: url(../images/meadow.jpg) no-repeat;
+  -webkit-perspective: 200px;
+  -moz-perspective: 200px;
+}
+
+.traveler2 {
+  position: absolute;
+  width: 50px;
+  height: 320px;
+
+  -webkit-animation-name: travel2;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-duration: 1.4s;
+
+  -moz-animation-name: travel2;
+  -moz-animation-timing-function: linear;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-direction: alternate;
+  -moz-animation-duration: 1.4s;
+}
+
+.bouncer2 {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+
+  -webkit-animation-name: bounce2;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-duration: 1s;
+
+  -moz-animation-name: bounce2;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-direction: alternate;
+  -moz-animation-duration: 1s;
+}
