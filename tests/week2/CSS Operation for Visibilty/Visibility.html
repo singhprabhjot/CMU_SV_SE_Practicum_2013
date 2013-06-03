@@ -2,17 +2,18 @@
 <html>
 <head>
 <script>
-function ChangeVisibilityToHide(x)
-{
-var el=document.getElementById("p1");
-el.style.visibility='hidden'
+function ChangeVisibilityToHide() {
+	var el=document.getElementById("p1");
+	el.style.visibility='hidden'
+	window.setInterval(ChangeVisibilityToShow,5000);
 }
 
-function ChangeVisibilityToShow(x)
-{
-var el=document.getElementById("p1");
-el.style.visibility='visible'
+function ChangeVisibilityToShow() {
+	var el=document.getElementById("p1");
+	el.style.visibility='visible';
+	window.setInterval(ChangeVisibilityToHide,5000);
 }
+
 
 </script>
 </head>
@@ -20,8 +21,8 @@ el.style.visibility='visible'
 
 <p id="p1">Press the button to change visibility </p>
 
-<input type="button" name="hide" value=" HIDE " onClick="ChangeVisibilityToHide(this);"/> 
-<input type="button" name="show" value=" SHOW " onClick="ChangeVisibilityToShow(this);"/>
+<input type="button" name="hide" value=" HIDE " onClick="ChangeVisibilityToHide();"/> 
+<input type="button" name="show" value=" SHOW " onClick="ChangeVisibilityToShow();"/>
 
 
 </body>
