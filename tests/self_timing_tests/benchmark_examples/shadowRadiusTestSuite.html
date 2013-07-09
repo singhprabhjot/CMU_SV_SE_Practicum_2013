@@ -1,0 +1,73 @@
+<html>
+
+<head>
+<style>
+	.default {
+		width:300px;
+		padding:10px 10px 20px 10px;
+		border:1px solid #BFBFBF;
+		margin-bottom: 30px;
+		border-radius: "";
+		float: left;
+	}
+	#testResults {
+		float: left;
+		margin-left: 60px;
+	}
+
+
+</style>
+
+</head>
+<body>
+ <h2>Box Shadow vs Border Radius</h2>
+<button type="button" name="test" onclick="suite.run({async: true}); return false;">Run Test</button><br/><br/>
+
+<div id="testArea"> 
+	<div id="target" class="default">
+		<img src="teamTahoe.jpg" alt="" width="284" height="213">
+			<p class="caption">Team Tahoe.</p>
+	</div>
+	<div id="testResults"> 
+		<h3>Results</h3>
+		
+	</div>
+
+</div>
+ 
+<script src="benchmark.js"></script>
+<script>
+var suite = new Benchmark.Suite;
+
+suite.add('Box Shadow', function() {
+	target.style.boxShadow="10px 10px 5px #888888";
+})
+.add('Border Radius', function() {
+  target.style.borderRadius="10px";
+})
+.add('Border Radius and Box Shadow', function() {
+  target.style.boxShadow="10px 10px 5px #888888";
+  target.style.borderRadius="10px";
+})
+.on('cycle', function(event, bench) {
+  console.log(event.target);
+  target.style.borderRadius = "";
+  target.style.boxShadow = "";
+  printResults(event.target);
+})
+.on('complete', function() {
+  document.getElementById("testResults").appendChild(document.createTextNode('Comparison: Fastest is ' + this.filter('fastest').pluck('name')));
+  
+}); 
+function printResults(result){
+	var para = document.createElement("p");
+  	var node=document.createTextNode(result.name+ " : Mean Time "+result.stats.mean);
+	para.appendChild(node);
+
+	var element=document.getElementById("testResults");
+	element.appendChild(para);
+}
+</script>
+ 
+</body>
+</html>
