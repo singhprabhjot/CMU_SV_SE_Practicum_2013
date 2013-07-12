@@ -1,7 +1,7 @@
 
 
 body {
-	background: #0A2A29;
+	background: #ffffff;
 	color: #eee;
 }
 article {
@@ -31,7 +31,7 @@ ul {
 	ul li {
 		position: relative;
 		padding: 16px;
-		background: #eee;
+		background: #ffffff;
 		color: #252525;
 		font-size: 18px;
 		z-index: 2;
@@ -43,6 +43,6 @@ ul {
 		        transform: translateZ(0px);
 	}
 	ul li:nth-child(odd) {
-		background: #fff;
+		background: #ffffff;
 	}
 
