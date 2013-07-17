@@ -44,7 +44,7 @@ bool firstTimePageCalled = YES;
 }
 
 
-
+//Configure the detail view for the user
 - (void) configureView
 {
     [self configureOldViews];
@@ -72,6 +72,7 @@ bool firstTimePageCalled = YES;
     self.labelWord = nil;
 }
 
+//Configure intial content of the page on iPAD detail view screen.
 -(void) configureOldViews
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -81,7 +82,6 @@ bool firstTimePageCalled = YES;
         if (!firstTimePageCalled)
         {
             [self removeOldViews];
-            //            NSLog(@"remove views called");
         }
         else {
             self.detailDescriptionLabel.text = @"Please select the word to \n view synonyms";
@@ -89,8 +89,10 @@ bool firstTimePageCalled = YES;
             self.detailDescriptionLabel.font = [UIFont fontWithName:@"Arial" size:35];
             firstTimePageCalled = NO;
         }
-    }   
+    }
 }
+
+//Remove all the existing views from details view before loading synoyms
 -(void)removeOldViews
 {
     NSArray *viewsToRemove = [self.view subviews];
@@ -99,6 +101,8 @@ bool firstTimePageCalled = YES;
     }
 }
 
+
+//Configure scroll view for showing the synonyms.
 - (void) configureScrollView
 {
     self.scrollView = nil;
@@ -111,6 +115,7 @@ bool firstTimePageCalled = YES;
     [self.scrollView setScrollsToTop:NO];
 }
 
+// To show the text of the synonyms
 - (void) addLabel: (NSString*)synonym :(int) frameIndex
 { 
     CGRect frame;
@@ -130,6 +135,7 @@ bool firstTimePageCalled = YES;
     label = nil;
 }
 
+// Mahe scroll view in circular form.
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat pageWidth = self.scrollView.frame.size.width;
     int page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
@@ -150,8 +156,9 @@ bool firstTimePageCalled = YES;
         [self.scrollView scrollRectToVisible:CGRectMake(lastFrameX,0,width,height) animated:NO];
     }
     pageControlBeingUsed = NO;
-} 
+}
 
+// To change pagination control on scroll
 - (IBAction)changePage {
     CGRect frame;
     frame.origin.x = self.scrollView.frame.size.width * self.pageControl.currentPage;
@@ -166,6 +173,7 @@ bool firstTimePageCalled = YES;
     [self removeOldViews];
     self.scrollView = nil;
 }
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -191,13 +199,6 @@ bool firstTimePageCalled = YES;
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
 }
-
-- (void)viewDidUnload {
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-    // NSLog(@"unloading");
-}
-
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     pageControlBeingUsed = NO;

@@ -67,7 +67,7 @@ id jsonObjects;
         }
     }
         cell.textLabel.text = [_objects objectAtIndex:indexPath.row];
-//      cell.imageView.image = [UIImage imageNamed:@"appception.jpg"];
+//      cell.imageView.image = [UIImage imageNamed:@"appception.jpg"]; //For inserting image in text view 
     return cell;
 }
 
@@ -92,6 +92,7 @@ id jsonObjects;
     synonyms = nil;
 }
 
+//To list of words from the text 
 -(void) readTextFromFile: (NSString*) fileName {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
     NSString *jsonString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error: NULL];
