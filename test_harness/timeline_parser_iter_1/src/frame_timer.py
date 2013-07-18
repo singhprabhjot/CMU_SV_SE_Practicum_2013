@@ -9,6 +9,7 @@ def deserialize_timeline_capture(path):
     deser_json = json.load(json_file)
     return deser_json
 
+
 def check_for_event_type (list_of_objects, event_name):
     event_is_present = False
     i = 0
@@ -22,6 +23,7 @@ def check_for_event_type (list_of_objects, event_name):
             i += 1
 
     return event_is_present
+
 
 def get_frame_timings(events_data, event_before_frame):
     is_frame_event_pending = False
@@ -75,9 +77,6 @@ def main(argv):
     style_change_event_type = "RecalculateStyles"
     next_frame_timings = get_frame_timings(events_data, style_change_event_type)
     print next_frame_timings
-
-    # Get frame timings after style change
-    # style_change_event_type = ""
 
 
 if __name__ == '__main__':
