@@ -373,9 +373,9 @@
 
 			function uploadResults(){
 				results['device_name'] = document.getElementById("device_name").value;
-		        var url = "http://appception-tahoe.herokuapp.com/environments";
+		        	var url = "http://appception-tahoe.herokuapp.com/environments";
 
-		        //POST, and log the result
+		       		//POST, and log the result
 		  		$.post(url, results, function(data){console.log(data);}, "json");
 			}
 
