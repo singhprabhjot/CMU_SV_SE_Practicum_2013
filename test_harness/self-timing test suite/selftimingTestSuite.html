@@ -373,23 +373,10 @@
 
 			function uploadResults(){
 				results['device_name'] = document.getElementById("device_name").value;
-				var http = new XMLHttpRequest();
+		        var url = "http://appception-tahoe.herokuapp.com/environments";
 
-		        var url = "http://appception-tahoe.herokuapp.com/selftests";
-		        
-		        var params = results;
-		        http.open("POST", url, true);
-
-		        //Send the proper header information along with the request
-		        //http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		        http.setRequestHeader("Content-length", params.length);
-		        http.setRequestHeader("Connection", "close");
-
-		        http.onreadystatechange = function() {//Call a function when the state changes.
-		          if(http.readyState == 4 && http.status == 200) {
-		          }
-		        }
-		        http.send(params);
+		        //POST, and log the result
+		  		$.post(url, results, function(data){console.log(data);}, "json");
 			}
 
 
