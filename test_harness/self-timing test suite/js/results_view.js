@@ -1,3 +1,11 @@
+/*
+    .::CSS Operations Test Suite::.
+    CMUSV SE Practicum Summer 2013 : Appception
+    Team Tahoe
+
+    results_view.js generates the view for results (table and chart)
+*/
+
 function displayResults(){
     testsuite.style.display = "none";
     testResults.style.display = "block";
@@ -5,6 +13,7 @@ function displayResults(){
     generateChart();
 }
 
+// Generate the table of results 
 function generateTable(){
     $.each(results['tests'], function(index,value){
         var row = document.createElement("tr");
@@ -23,6 +32,7 @@ function generateTable(){
     });
 }
 
+// Generate the chart of results using highcharts.js
 function generateChart(){  
     var x_axis = new Array();
     var values = new Array();

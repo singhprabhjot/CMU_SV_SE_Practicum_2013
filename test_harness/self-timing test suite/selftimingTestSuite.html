@@ -1,3 +1,9 @@
+<!--
+    .::CSS Operations Test Suite::.
+    CMUSV SE Practicum Summer 2013 : Appception
+    Team Tahoe
+-->
+
 <html>
 	<head>
 		<title>Self Timing Test Suite: CSS Operations </title>
@@ -9,7 +15,8 @@
 		<div id="testsuite">
 			<h2>CSS Operations Test Suite</h2>
 			
-			Enter Device Name: <input type="text" name="device" id="device_name"/><br/>
+			Enter Device Name: <input type="text" name="device" id="device_name"/> 
+			<span id="error">Please enter the device name.</span>
 			<p>
 				Run each test suite by clicking the 'Run Test' buttons. When tests are done, you can view or upload the results.<br/>
 				<button type="button" id="result" name="result" onclick="displayResults();" disabled>View Results</button>
@@ -22,7 +29,7 @@
 					<td>	
 						<div class="default">
 							Test 1. Box-Shadow, Border-Radius, Radius and Shadow, Opacity, Visibility, Image Resize, Overflow:Scroll &nbsp;&nbsp;
-							<button type="button" name="test" onclick="suiteOne.run({async: true}); return false;">Run Test 1</button><br/>
+							<button type="button" name="test" onclick="suiteOne.run({async: true}); testNumber = 0; return false;">Run Test 1</button><br/>
 							<img id="image" src="teamTahoe.jpg" class="image_style">
 						</div>
 						<br/>
@@ -30,7 +37,7 @@
 					<td>
 						<div class="default">
 						    Test 2: Canvas: Object rendering and motion
-						    <button type="button" name="test" onclick="suiteTwo.run({async: true}); return false;">Run Test 2</button><br/>
+						    <button type="button" name="test" onclick="suiteTwo.run({async: true}); testNumber = 0; return false;">Run Test 2</button><br/>
 						    <canvas id="canvas"></canvas>
 						    <br/>
 						    <canvas id="motion_canvas" width="100px" height="100px"></canvas>
@@ -43,7 +50,7 @@
 					<td>
 						<div class="default">
 							Test 3: CSS Transforms: Translate, Scale, Rotate and Skew 
-						    <button type="button" name="test" onclick="suiteThree.run({async: true}); return false;">Run Test 3</button><br/>
+						    <button type="button" name="test" onclick="suiteThree.run({async: true}); testNumber = 0; return false;">Run Test 3</button><br/>
 						    <div id="block" class="movingBlock"></div>
 						    Transitions: width and height
 						    <div id="block2" class="movingBlock2"></div>
@@ -53,7 +60,7 @@
 					<td>
 						<div class="default">
 							Test 4: Animation - position:fixed, position:relative and requestAnimationFrame 
-						    <button type="button" name="test" onclick="suiteFour.run({async: true}); return false;">Run Test 4</button><br/>
+						    <button type="button" name="test" onclick="suiteFour.run({async: true}); testNumber = 0; return false;">Run Test 4</button><br/>
 						    <div id="Block" class="movingBlock"></div>    
 			    		</div>
 						<br/>
@@ -65,8 +72,8 @@
 
 		<div id="testResults">
 			<h2> Self-timing Test Suite Results</h2>
-			<button type="button" name="test" onclick="displayTestSuite();">Go to Test Suite</button> 
-			<button type="button" id="upload" name="upload" onclick="uploadResults();">Upload Results</button><br/>
+			<button type="button" name="test" onclick="displayTestSuite();">Go back to Test Suite</button> 
+			<br/>
 			<h4>Device Information</h4>
 			<table>
 				<tr>
