@@ -1,4 +1,14 @@
-/**/
+/*
+    .::CSS Operations Test Suite::.
+    CMUSV SE Practicum Summer 2013 : Appception
+    Team Tahoe
+
+    testsuite_helper.js contains helper functions for the test suite.
+    - checks if css operations are supported on device
+    - compiles the test results into a json 
+    - uploads test details to backend
+*/
+
 	var results = {};
 	var i=0;
 
@@ -22,13 +32,18 @@
 
 	function uploadResults(){
 		results['device_name'] = document.getElementById("device_name").value;
-        var url = "http://appception-tahoe.herokuapp.com/environments";
-
+		if(results['device_name'] != ""){
+			error.style.display = "none";
+			var url = "http://appception-tahoe.herokuapp.com/environments";
        		//POST, and log the result
-  		$.post(url, results, function(data){console.log(data);}, "json");
+  			$.post(url, results, function(data){console.log(data);}, "json");
+		}else{
+			error.style.display = "block";
+		}
+        
 	}
 
-	function printResults(result){
+	function compileResults(result, suiteNumber){
 			
 		var style_name = result.name;
 		
@@ -38,7 +53,7 @@
 		//populate json
 		var style_test = {};
 		style_test["name"] = style_name;
-		if (checkCSSsupport()){
+		if (checkCSSsupport(suiteNumber)){
 			style_test["msTime"] = avgTime;
 			style_test["kOps"] = kOps;
 		}
@@ -51,82 +66,96 @@
 		i++;
 		console.log(results);
 	}
-
-	function checkCSSsupport(){
+//Checks if css operation is supported as and when test is run.
+//TO-DO: Simplify this code
+	function checkCSSsupport(suiteNumber){
 		var isSupported = true;
 		
-		switch(i){
-			case 0:
-				if (typeof document.body.style.WebkitBoxShadow == "undefined")
+		if(suiteNumber == "one"){
+			switch(testNumber){
+				case 0:
+				if (typeof document.body.style.boxShadow == "undefined")
 					isSupported = false;
-			break;
-			case 1:
-				if (typeof document.body.style.WebkitBorderRadius == "undefined")
-					isSupported = false;
-			break;
-			case 2:
-				if (typeof document.body.style.WebkitBoxShadow == "undefined" && typeof document.body.style.WebkitBorderRadius == "undefined")
-					isSupported = false;
-			break;
-			case 3:
-				if (typeof document.body.style.opacity == "undefined")
-					isSupported = false;
-			break;
-			case 4:
-				if (typeof document.body.style.visibility == "undefined")
-					isSupported = false;
-			break;
-			case 5:
-				if (typeof document.body.style.width == "undefined" && typeof document.body.style.height == "undefined")
-					isSupported = false;
-			break;
-			case 6:
-				if (typeof document.body.style.overflow == "undefined")
-					isSupported = false;
-			break;
-			case 7:
+				break;
+				case 1:
+					if (typeof document.body.style.borderRadius == "undefined")
+						isSupported = false;
+				break;
+				case 2:
+					if (typeof document.body.style.boxShadow == "undefined" && typeof document.body.style.borderRadius == "undefined")
+						isSupported = false;
+				break;
+				case 3:
+					if (typeof document.body.style.opacity == "undefined")
+						isSupported = false;
+				break;
+				case 4:
+					if (typeof document.body.style.visibility == "undefined")
+						isSupported = false;
+				break;
+				case 5:
+					if (typeof document.body.style.width == "undefined" && typeof document.body.style.height == "undefined")
+						isSupported = false;
+				break;
+				case 6:
+					if (typeof document.body.style.overflow == "undefined")
+						isSupported = false;
+				break;
+			}
+		}
+		if(suiteNumber == "two"){
+			switch(testNumber){
+				case 0:
 				var elem = document.createElement('canvas');
 				if (!(elem.getContext && elem.getContext('2d')))
 					isSupported = false;
-			break;
-			case 8:
-				var elem = document.createElement('canvas');
-				if (!(elem.getContext && elem.getContext('2d')))
+				break;
+				case 1:
+					var elem = document.createElement('canvas');
+					if (!(elem.getContext && elem.getContext('2d')))
+						isSupported = false;
+				break;
+			}
+		}
+		if(suiteNumber == "three"){
+			switch(testNumber){
+				case 0:
+				if (typeof document.body.style.transform == "undefined" && typeof document.body.style.webkitTransform == "undefined")
 					isSupported = false;
-			break;
-			case 9:
-				if (typeof document.body.style.webkitTransform == "undefined")
+				break;
+				case 1:
+					if (typeof document.body.style.transform == "undefined" && typeof document.body.style.webkitTransform == "undefined")
+						isSupported = false;
+				break;
+				case 2:
+					if (typeof document.body.style.transform == "undefined" && typeof document.body.style.webkitTransform == "undefined")
+						isSupported = false;
+				break;
+				case 3:
+					if (typeof document.body.style.transform == "undefined" && typeof document.body.style.webkitTransform == "undefined")
+						isSupported = false;
+				break;
+				case 4:
+					if (typeof document.body.style.transition == "undefined" && typeof document.body.style.webkitTransition == "undefined")
+						isSupported = false;
+				break;
+			}
+		}
+		if(suiteNumber == "four"){
+			switch(testNumber){
+				case 0:
+				if (typeof document.body.style.animationName == "undefined" && typeof document.body.style.position == "undefined")
 					isSupported = false;
-			break;
-			case 10:
-				if (typeof document.body.style.webkitTransform == "undefined")
-					isSupported = false;
-			break;
-			case 11:
-				if (typeof document.body.style.webkitTransform == "undefined")
-					isSupported = false;
-			break;
-			case 12:
-				if (typeof document.body.style.webkitTransform == "undefined")
-					isSupported = false;
-			break;
-			case 13:
-				if (typeof document.body.style.WebkitTransition == "undefined")
-					isSupported = false;
-			break;
-			case 14:
-				if (typeof document.body.style.webkitAnimationName == "undefined" && typeof document.body.style.position == "undefined")
-					isSupported = false;
-			break;
-			case 15:
-				if (typeof document.body.style.webkitAnimationName == "undefined" && typeof document.body.style.position == "undefined")
-					isSupported = false;
-			break;
-			case 16:
-				if (typeof document.body.style.webkitAnimationName == "undefined" && typeof document.body.style.position == "undefined" && typeof window.webkitRequestAnimationFrame == "undefined")
-					isSupported = false;
-			break;
-
+				break;
+				case 1:
+					if (typeof document.body.style.animationName == "undefined" && typeof document.body.style.position == "undefined")
+						isSupported = false;
+				break;
+				case 2:
+					if (typeof document.body.style.animationName == "undefined" && typeof document.body.style.position == "undefined" && typeof window.requestAnimationFrame == "undefined")
+						isSupported = false;
+				break;
+			}
 		}
 
 		return isSupported;
