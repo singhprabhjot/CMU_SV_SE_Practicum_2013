@@ -1,319 +1,249 @@
 <!DOCTYPE html>
-
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Dictionary</title>
-    <link href="_/css/jquery.mobile.css" rel="stylesheet">
-    <script src="jquery/jquery-1.9.1.min.js"></script>
-     <script src=  "jquery/jquery.mobile-1.3.1.min.js"></script>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name= "viewport">
-    <script src="_/js/jquery.js"></script>
-     <script src="_/js/jquery.mobile.js"></script>
-     <script src="_/js/myscript.js"></script>
-    <script src="Synonym.js"></script>
-    <link href="css/main.css" type="text/css" rel="stylesheet" />      
-    <script type="text/javascript" src="js/prettify.js"></script>
-    <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
- <script type="text/javascript">
-        // $.browser.device = (/android|webos|iphone|ipad|ipod|blackberry/i.test(navigator.userAgent.toLowerCase()));
-    console.log("hi");
-    console.log($.browser.device);
-    </script>
-    <!-- <link href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" rel="stylesheet" /> -->
-  <link href="ios_inspired/styles.css" rel="stylesheet" />
-
-    <style>
-    #footerTabs {
-      background: #FFF -webkit-radial-gradient(circle, #FFF, #dee2e4);
-    }
-    .ui-listview sup {
-      font-size: 0.6em;
-      color: #cc0000;
-    }
-  </style>
+   <head>
+      <meta charset="utf-8">
+      <title>Dictionary</title>
+      <meta content="width=device-width, initial-scale=1, maximum-scale=1" name= "viewport">
 
 
-<link href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" rel="stylesheet" />
-  <link href="ios_inspired/styles.css" rel="stylesheet" />
-  
-  <script>
-    // all dialog buttons should close their parent dialog
-    $(".ui-dialog button").live("click", function() {   
-      $("[data-role='dialog']").dialog("close");    
-    });
-    $(document).on("mobileinit", function(){
-      $.mobile.defaultPageTransition = "slide";
-    });
-  </script>
-  
-  <style>
-    #footerTabs {
-      background: #FFF -webkit-radial-gradient(circle, #FFF, #dee2e4);
-    }
-    .ui-listview sup {
-      font-size: 0.6em;
-      color: #cc0000;
-    }
-  </style>
-
-
-</head>
-
-<body onload="readText()">
-
-
- 
+      <!-- jQuery Mobile File -->
+      <link href="_/css/jquery.mobile.css" rel="stylesheet">
+      <script src="_/js/jquery.js"></script>
+      <script src="_/js/jquery.mobile.js"></script>
+      <script src="Synonym.js"></script>
 
 
 
-
-    <div data-role="page" data-title="Dictionary" id="home">
-
-        <div data-role="header" data-position="fixed"> 
-    <h1>Word List</h1>
-  </div><!-- /header --> 
+      <!-- For swipe functionality -->
+      <link href="css/main.css" type="text/css" rel="stylesheet" />
+      <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+      <!-- Swipe functionality ends -->
 
 
-         <div id="synonyms">  
-          <div id="SynonymLabel" class="box">
-              <div id='mySwipe' style='max-width:500px;margin:0 auto' class='swipe'>
-                <div class='swipe-wrap'>
-                  <div>Synonyms Will be Displayed Here</div>
-                </div>
-              </div>
-              <script src='swipe/swipe.js'></script>
-              <script>
 
-              // pure JS
-              var elem = document.getElementById('mySwipe');
-              window.mySwipe = Swipe(elem, {
-              });
-              </script>
+      <!-- For checking out which platform is running-->
+      <script type="text/javascript">
+        /*
+         // $.browser.device = (/android|webos|iphone|ipad|ipod|blackberry/i.test(navigator.userAgent.toLowerCase()));
+         console.log("hi");
+         console.log($.browser.device);
+         */
+      </script>
+
+
+      <!-- For ios -->
+      <link href="ios_inspired/styles.css" rel="stylesheet" />
+      <style>
+         #footerTabs {
+         background: #FFF -webkit-radial-gradient(circle, #FFF, #dee2e4);
+         }
+         .ui-listview sup {
+         font-size: 0.6em;
+         color: #cc0000;
+         }
+      </style>
+
+      <script>
+         // all dialog buttons should close their parent dialog
+         $(".ui-dialog button").live("click", function() {   
+           $("[data-role='dialog']").dialog("close");    
+         });
+         $(document).on("mobileinit", function(){
+           $.mobile.defaultPageTransition = "slide";
+         });
+      </script>
+    <!-- iOS  ends-->
+
+
+   </head>
+   <body onload="readText()">
+      <div data-role="page" data-title="Dictionary" id="home">
+         <div data-role="header" data-position="fixed">
+            <h1>Word List</h1>
+         </div>
+         <!-- /header --> 
+         <div id="synonyms">
+            <div id="SynonymLabel" class="box">
+               <div id='mySwipe' style='max-width:500px;margin:0 auto' class='swipe'>
+                  <div class='swipe-wrap'>
+                     <div>Synonyms Will be Displayed Here</div>
+                  </div>
+               </div>
+               <script src='swipe/swipe.js'></script>
+               <script>
+                  // pure JS
+                  var elem = document.getElementById('mySwipe');
+                  window.mySwipe = Swipe(elem, {
+                  });
+               </script>
             </div>
-        </div>    
-
-        <ul data-click="listViewClick" data-role="listview" id="dictionary" data-inset="true">
-        </ul>
+         </div>
+         <ul data-click="listViewClick" data-role="listview" id="dictionary" data-inset="true">
+         </ul>
       </div>
-    </div><!-- page -->
-
-
-
-<!--  -->
-
-
-
-
-
-<div data-role="page" id="headers"> 
- 
-  <div data-role="header" data-position="fixed">
-    <h1>Headers</h1>
-    <a href="#" data-rel="back" data-theme="a">Back</a>
-    </a>
-  </div><!-- /header --> 
- 
-  <div data-role="content"> 
-  
-    <p>
-      The default bar is the blue, but you can also use the black by specifying <em>data-theme="b"</em>.
-    </p>
-    
-    <div data-role="header" data-position="inline">
-      <a href="#" data-rel="back" data-theme="a">Back</a>
-      <h1>Blue Bar</h1>
-      <a href="#" data-theme="a">Button</a>
-    </div>
-    
-    <br />
-    
-    <div data-role="header" data-theme="b" data-position="inline">
-      <a href="#" data-rel="back" data-theme="b">Back</a>
-      <h1>Black Bar</h1>
-      <a href="#" data-theme="b">Button</a>
-    </div>
-  
-  </div>
-    
-</div>
-
-
-
-
-
-<!--  -->
-
-
-    <script type="text/javascript">
-      $("#SynonymLabel").swipe( {
-            //Generic swipe handler for all directions
-            swipe:function(event, direction, distance, duration, fingerCount) {
-              if (direction == 'left')
-              {
-                 mySwipe.next();
-              }
-              if(direction == 'right')
-              {      
-                 mySwipe.prev();
-              }
-
-            },
-            //Default is 75px, set to 0 for demo so any distance triggers swipe
-             threshold:0
-          });
-
-        $(document).ready(function() {
-
-     
-           $("#synonyms").hide();
-           // $("#dictionary").hide();
-            // $("#synoList").html("<ul data-role='listview' data-inset='true'> <li><a href='#newheaders'>Headers Bars</a></li> <li><a href='#newheaders'>Header</a></li>  </ul>  ");
-          
-
-
-      // <li><a href='#newheaders'>Headers Bars</a></li> 
-               // 
-        });
-
-        $('#synonyms').select(function() {
-            alert('Handler for .select() called.');
-        });
-
-    </script>
-
-    <script type="text/javascript">
-    var value;
-    var lines;
-    var readlines = 0;
-    
-    var synonymsOfWord ;
-    var map = {};
-/*
-    var currentSynonymIndex = 0;
-    function showTowardsRight(){
-      var totalSynonyms = synonymsOfWord.length
-      currentSynonymIndex++;
-      if (currentSynonymIndex == totalSynonyms){
-        currentSynonymIndex = 0;
-      }
-      $("#SynonymLabel").html(synonymsOfWord[currentSynonymIndex]);
-    }
-
-    function showTowardsLeft(){
-      var totalSynonyms = synonymsOfWord.length
-      currentSynonymIndex -- ;
-      if (currentSynonymIndex <= 0){
-        currentSynonymIndex = totalSynonyms - 1;
-      }
-      $("#SynonymLabel").html(synonymsOfWord[currentSynonymIndex]);
-    }
-*/
-    function readText(){
-     lines = str.split("\n");
-     for(var i = 0; i < 100; i++)
-          {
-              var words = lines[readlines++].split(",");
-              map[words[0]] = words;
-              var li=document.createElement("li");
-              var a = document.createElement("a");
-              var linkText = document.createTextNode(words[0]);
-              li.innerHTML = words[0];
-              a.setAttribute("style","data-role: button; data-icon: arrow-r; visibility: hidden");
-              a.innerHTML = words;
-              li.setAttribute("data-name", words[1]);
-              li.appendChild(document.body.appendChild(a));
-              dictionary.appendChild(li);
-              $("#dictionary").listview("refresh");
-          }
-    }
-
-
-    $('#dictionary li').live('click', function(e){
-        var key = $(this).text();
-        value = key.split(",");
-        value.splice(0,1);
-        value = value + "";
-
-       synonymsOfWord = value.split(",");
-
-
-         $("#synonyms").show();
-         $("#dictionary").hide();
-
-         currentSynonymIndex = 0;
-         var synonymDiv = "";
-
-
-          console.log(value);
-          console.log(synonymsOfWord.length);
-          console.log("Length "+synonymsOfWord[synonymsOfWord.length-1]);
-         for (var i = 0; i < synonymsOfWord.length -1 ; i++) {
-           synonymDiv = synonymDiv+"<div>"+synonymsOfWord[i]+"</div>";
-         };
-        $(".swipe-wrap").html(synonymDiv);
-        var elem = document.getElementById('mySwipe');
-          window.mySwipe = Swipe(elem, {
-            // startSlide: 4,
-            // auto: 3000,
-            // continuous: true,
-            // disableScroll: true,
-            // stopPropagation: true,
-            // callback: function(index, element) {},
-            // transitionEnd: function(index, element) {}
-          });
-
-    });
-
-
-
-    $(window).scroll(function () 
-    {
-      if(readlines < lines.length)
-        {
-        var words = lines[readlines++].split(",");
-        for(var i = 0; i < 10; i++)
-            {
-              var words = lines[readlines++].split(",");
-              map[words[0]] = words;
-              var li=document.createElement("li");
-              var a = document.createElement("a");
-              var linkText = document.createTextNode(words[0]);
-              li.innerHTML = words[0];
-              a.setAttribute("style","data-role: button; data-icon: arrow-r; visibility: hidden");
-              a.innerHTML = words;
-              li.appendChild(document.body.appendChild(a));
-              dictionary.appendChild(li);
-            }
-      }
-       $("#dictionary").listview("refresh");
-    });
-
-    </script>
-
-    <style>
-
-
-      /* Swipe 2 required styles */
-
-      .swipe {
-        overflow: hidden;
-        visibility: hidden;
-        position: relative;
-      }
-      .swipe-wrap {
-        overflow: hidden;
-        position: relative;
-      }
-      .swipe-wrap > div {
-        float:left;
-        width:100%;
-        position: relative;
-      }
-
-      /* END required styles */
-
-   </style>
-
-</body>
+      </div><!-- page -->
+      <script type="text/javascript">
+         $("#SynonymLabel").swipe( {
+               //Generic swipe handler for all directions
+               swipe:function(event, direction, distance, duration, fingerCount) {
+                 if (direction == 'left')
+                 {
+                    mySwipe.next();
+                 }
+                 if(direction == 'right')
+                 {      
+                    mySwipe.prev();
+                 }
+         
+               },
+               //Default is 75px, set to 0 for demo so any distance triggers swipe
+                threshold:0
+             });
+         
+           $(document).ready(function() {
+         
+         
+              $("#synonyms").hide();
+              // $("#dictionary").hide();
+               // $("#synoList").html("<ul data-role='listview' data-inset='true'> <li><a href='#newheaders'>Headers Bars</a></li> <li><a href='#newheaders'>Header</a></li>  </ul>  ");
+             
+         
+         
+         // <li><a href='#newheaders'>Headers Bars</a></li> 
+                  // 
+           });
+         
+           $('#synonyms').select(function() {
+               alert('Handler for .select() called.');
+           });
+         
+      </script>
+      <script type="text/javascript">
+         var value;
+         var lines;
+         var readlines = 0;
+         
+         var synonymsOfWord ;
+         var map = {};
+         
+         /*
+         var currentSynonymIndex = 0;
+         function showTowardsRight(){
+           var totalSynonyms = synonymsOfWord.length
+           currentSynonymIndex++;
+           if (currentSynonymIndex == totalSynonyms){
+             currentSynonymIndex = 0;
+           }
+           $("#SynonymLabel").html(synonymsOfWord[currentSynonymIndex]);
+         }
+         
+         function showTowardsLeft(){
+           var totalSynonyms = synonymsOfWord.length
+           currentSynonymIndex -- ;
+           if (currentSynonymIndex <= 0){
+             currentSynonymIndex = totalSynonyms - 1;
+           }
+           $("#SynonymLabel").html(synonymsOfWord[currentSynonymIndex]);
+         }
+         */
+         function readText(){
+          lines = str.split("\n");
+          for(var i = 0; i < 100; i++)
+               {
+                   var words = lines[readlines++].split(",");
+                   map[words[0]] = words;
+                   var li=document.createElement("li");
+                   var a = document.createElement("a");
+                   var linkText = document.createTextNode(words[0]);
+                   li.innerHTML = words[0];
+                   a.setAttribute("style","data-role: button; data-icon: arrow-r; visibility: hidden");
+                   a.innerHTML = words;
+                   li.setAttribute("data-name", words[1]);
+                   li.appendChild(document.body.appendChild(a));
+                   dictionary.appendChild(li);
+                   $("#dictionary").listview("refresh");
+               }
+         }
+         
+         
+         $('#dictionary li').live('click', function(e){
+             var key = $(this).text();
+             value = key.split(",");
+             value.splice(0,1);
+             value = value + "";
+         
+            synonymsOfWord = value.split(",");
+         
+         
+              $("#synonyms").show();
+              $("#dictionary").hide();
+         
+              currentSynonymIndex = 0;
+              var synonymDiv = "";
+         
+         
+               console.log(value);
+               console.log(synonymsOfWord.length);
+               console.log("Length "+synonymsOfWord[synonymsOfWord.length-1]);
+              for (var i = 0; i < synonymsOfWord.length -1 ; i++) {
+                synonymDiv = synonymDiv+"<div>"+synonymsOfWord[i]+"</div>";
+              };
+             $(".swipe-wrap").html(synonymDiv);
+             var elem = document.getElementById('mySwipe');
+               window.mySwipe = Swipe(elem, {
+                 // startSlide: 4,
+                 // auto: 3000,
+                 // continuous: true,
+                 // disableScroll: true,
+                 // stopPropagation: true,
+                 // callback: function(index, element) {},
+                 // transitionEnd: function(index, element) {}
+               });
+         
+         });
+         
+         
+         
+         $(window).scroll(function () 
+         {
+           if(readlines < lines.length)
+             {
+             var words = lines[readlines++].split(",");
+             for(var i = 0; i < 10; i++)
+                 {
+                   var words = lines[readlines++].split(",");
+                   map[words[0]] = words;
+                   var li=document.createElement("li");
+                   var a = document.createElement("a");
+                   var linkText = document.createTextNode(words[0]);
+                   li.innerHTML = words[0];
+                   a.setAttribute("style","data-role: button; data-icon: arrow-r; visibility: hidden");
+                   a.innerHTML = words;
+                   li.appendChild(document.body.appendChild(a));
+                   dictionary.appendChild(li);
+                 }
+           }
+            $("#dictionary").listview("refresh");
+         });
+         
+      </script>
+      <style>
+         /* Swipe 2 required styles */
+         .swipe {
+         overflow: hidden;
+         visibility: hidden;
+         position: relative;
+         }
+         .swipe-wrap {
+         overflow: hidden;
+         position: relative;
+         }
+         .swipe-wrap > div {
+         float:left;
+         width:100%;
+         position: relative;
+         }
+         /* END required styles */
+      </style>
+   </body>
 </html>
