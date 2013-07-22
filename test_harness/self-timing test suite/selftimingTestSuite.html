@@ -1,0 +1,109 @@
+<!--
+    .::CSS Operations Test Suite::.
+    CMUSV SE Practicum Summer 2013 : Appception
+    Team Tahoe
+-->
+
+<html>
+	<head>
+		<title>Self Timing Test Suite: CSS Operations </title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="testsuite">
+			<h2>CSS Operations Test Suite</h2>
+			
+			Enter Device Name: <input type="text" name="device" id="device_name"/> 
+			<span id="error">Please enter the device name.</span>
+			<p>
+				Run each test suite by clicking the 'Run Test' buttons. When tests are done, you can view or upload the results.<br/>
+				<button type="button" id="result" name="result" onclick="displayResults();" disabled>View Results</button>
+				<button type="button" id="upload" name="upload" onclick="uploadResults();" disabled>Upload Results</button>
+			</p>
+				
+						
+			<table>
+				<tr>
+					<td>	
+						<div class="default">
+							Test 1. Box-Shadow, Border-Radius, Radius and Shadow, Opacity, Visibility, Image Resize, Overflow:Scroll &nbsp;&nbsp;
+							<button type="button" name="test" onclick="suiteOne.run({async: true}); testNumber = 0; return false;">Run Test 1</button><br/>
+							<img id="image" src="teamTahoe.jpg" class="image_style">
+						</div>
+						<br/>
+					</td>
+					<td>
+						<div class="default">
+						    Test 2: Canvas: Object rendering and motion
+						    <button type="button" name="test" onclick="suiteTwo.run({async: true}); testNumber = 0; return false;">Run Test 2</button><br/>
+						    <canvas id="canvas"></canvas>
+						    <br/>
+						    <canvas id="motion_canvas" width="100px" height="100px"></canvas>
+			    		</div>
+			    		<br/>
+					</td>
+				
+				</tr>
+				<tr>
+					<td>
+						<div class="default">
+							Test 3: CSS Transforms: Translate, Scale, Rotate and Skew 
+						    <button type="button" name="test" onclick="suiteThree.run({async: true}); testNumber = 0; return false;">Run Test 3</button><br/>
+						    <div id="block" class="movingBlock"></div>
+						    Transitions: width and height
+						    <div id="block2" class="movingBlock2"></div>
+		    			</div>
+						<br/>
+					</td>
+					<td>
+						<div class="default">
+							Test 4: Animation - position:fixed, position:relative and requestAnimationFrame 
+						    <button type="button" name="test" onclick="suiteFour.run({async: true}); testNumber = 0; return false;">Run Test 4</button><br/>
+						    <div id="Block" class="movingBlock"></div>    
+			    		</div>
+						<br/>
+					</td>
+					
+				</tr>	
+			</table>
+		</div>
+
+		<div id="testResults">
+			<h2> Self-timing Test Suite Results</h2>
+			<button type="button" name="test" onclick="displayTestSuite();">Go back to Test Suite</button> 
+			<br/>
+			<h4>Device Information</h4>
+			<table>
+				<tr>
+					<td>
+						Platform: 
+					</td>
+					<td id="platform"></td>
+				</tr>
+				<tr>
+					<td>
+						User Agent: 
+					</td>
+					<td id="user_agent"></td>
+				</tr>
+			</table>
+			<br/>
+			<div id="container" style="min-width: 600px; height: 600px; margin: 0 auto; float:left"></div>
+			<table id="resultTable" border="1">
+				<th>CSS Operation</th>
+				<th>Average Time (ms)</th>
+				<th>kOps/sec</th>
+			</table>		
+		</div>
+
+		<script src="js/lib/highcharts.js"></script>
+		<script src="js/lib/exporting.js"></script>
+		<script src="js/lib/benchmark.js"></script>
+
+		<script src="js/testsuite.js"></script>
+		<script src="js/testsuite_helper.js"></script>
+		<script src="js/results_view.js"></script>
+	</body>
+</html>

@@ -1,0 +1,86 @@
+/*
+    .::CSS Operations Test Suite::.
+    CMUSV SE Practicum Summer 2013 : Appception
+    Team Tahoe
+*/
+
+.image_style {
+	width: 284px; 
+	height: 213px;
+	padding:10px 10px 20px 10px;
+	border:1px solid #BFBFBF;
+	margin-bottom: 30px;
+	float: left;
+}
+td
+{
+	padding:6px;
+}
+.default {
+	width:320px;
+	padding:10px 10px 20px 10px;
+	border:1px solid #BFBFBF;
+	height: 300px;
+}
+.movingBlock
+{
+	width:80px;
+	height:80px;
+	background:red;
+	position:relative;
+
+}
+.movingBlock2 {
+	width:80px;
+	height:80px;
+	background:red;
+	transition: width 2s, height 2s;
+	-webkit-transition:width 2s, height 2s;
+}
+
+.animationBlock {
+	width:80px;
+	height:80px;
+	background:red;
+	animation:testAnimate 5s;
+	-webkit-animation:testAnimate 5s; /* Safari and Chrome */
+}
+
+@keyframes testAnimate
+{
+0%   {background:red; left:0px; top:0px;}
+25%  {background:yellow; left:170px; top:0px;}
+50%  {background:blue; left:170px; top:170px;}
+75%  {background:green; left:0px; top:170px;}
+100% {background:red; left:0px; top:0px;}
+}
+
+@-webkit-keyframes testAnimate /* Safari and Chrome */
+{
+0%   {background:red; left:0px; top:0px;}
+25%  {background:yellow; left:170px; top:0px;}
+50%  {background:blue; left:170px; top:170px;}
+75%  {background:green; left:0px; top:170px;}
+100% {background:red; left:0px; top:0px;}
+}
+
+#testResults {
+	display:none;
+	margin-top: 20px;
+	
+}
+#resultTable{
+	float: left;
+	margin-left: 20px;
+}
+button {
+	font-size: 13px;
+	color: blue;
+}
+button:disabled{
+	color: grey;
+}
+#error {
+	color: red;
+	display: none;
+}
