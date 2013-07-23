@@ -4,33 +4,23 @@
       <meta charset="utf-8">
       <title>Dictionary</title>
       <meta content="width=device-width, initial-scale=1, maximum-scale=1" name= "viewport">
-
-
       <!-- jQuery Mobile File -->
       <link href="_/css/jquery.mobile.css" rel="stylesheet">
       <script src="_/js/jquery.js"></script>
       <script src="_/js/jquery.mobile.js"></script>
       <script src="Synonym.js"></script>
-
-
-
       <!-- For swipe functionality -->
       <link href="css/main.css" type="text/css" rel="stylesheet" />
       <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
       <!-- Swipe functionality ends -->
-
-
-
       <!-- For checking out which platform is running-->
       <script type="text/javascript">
-        /*
-         // $.browser.device = (/android|webos|iphone|ipad|ipod|blackberry/i.test(navigator.userAgent.toLowerCase()));
-         console.log("hi");
-         console.log($.browser.device);
-         */
+         /*
+          // $.browser.device = (/android|webos|iphone|ipad|ipod|blackberry/i.test(navigator.userAgent.toLowerCase()));
+          console.log("hi");
+          console.log($.browser.device);
+          */
       </script>
-
-
       <!-- For ios -->
       <link href="ios_inspired/styles.css" rel="stylesheet" />
       <style>
@@ -42,8 +32,8 @@
          color: #cc0000;
          }
       </style>
-
       <script>
+
          // all dialog buttons should close their parent dialog
          $(".ui-dialog button").live("click", function() {   
            $("[data-role='dialog']").dialog("close");    
@@ -52,9 +42,7 @@
            $.mobile.defaultPageTransition = "slide";
          });
       </script>
-    <!-- iOS  ends-->
-
-
+      <!-- iOS  ends-->
    </head>
    <body onload="readText()">
       <div data-role="page" data-title="Dictionary" id="home">
@@ -71,7 +59,6 @@
                </div>
                <script src='swipe/swipe.js'></script>
                <script>
-                  // pure JS
                   var elem = document.getElementById('mySwipe');
                   window.mySwipe = Swipe(elem, {
                   });
@@ -82,6 +69,31 @@
          </ul>
       </div>
       </div><!-- page -->
+      <!--  -->
+      <div data-role="page" id="headers">
+         <div data-role="header" data-position="fixed">
+            <h1>Headers</h1>
+            <a href="#" data-rel="back" data-theme="a">Back</a>
+            </a>
+         </div>
+         <!-- /header --> 
+         <div id="synonyms">
+            <div id="SynonymLabel" class="box">
+               <div id='mySwipe' style='max-width:500px;margin:0 auto' class='swipe'>
+                  <div class='swipe-wrap'>
+                     <div>Synonyms Will be Displayed Here</div>
+                  </div>
+               </div>
+               <script src='swipe/swipe.js'></script>
+               <script>
+                  var elem = document.getElementById('mySwipe');
+                  window.mySwipe = Swipe(elem, {
+                  });
+               </script>
+            </div>
+         </div>
+      </div>
+      <!--  -->
       <script type="text/javascript">
          $("#SynonymLabel").swipe( {
                //Generic swipe handler for all directions
@@ -101,16 +113,9 @@
              });
          
            $(document).ready(function() {
-         
-         
+            $.mobile.defaultPageTransition = "fade";
               $("#synonyms").hide();
               // $("#dictionary").hide();
-               // $("#synoList").html("<ul data-role='listview' data-inset='true'> <li><a href='#newheaders'>Headers Bars</a></li> <li><a href='#newheaders'>Header</a></li>  </ul>  ");
-             
-         
-         
-         // <li><a href='#newheaders'>Headers Bars</a></li> 
-                  // 
            });
          
            $('#synonyms').select(function() {
@@ -155,10 +160,20 @@
                    var li=document.createElement("li");
                    var a = document.createElement("a");
                    var linkText = document.createTextNode(words[0]);
-                   li.innerHTML = words[0];
+
+
+                   // Uncomment to have iOS look and feel
+                   // li.innerHTML = "<a href='#headers'>" + words[0] + "</a> <span class='ui-icon ui-icon-arrow-r ui-icon-shadow'>&nbsp;</span>" ;
+
+                    // Comment this line to see iOS look and feel
+                    li.innerHTML = words[0];
+
+
+
                    a.setAttribute("style","data-role: button; data-icon: arrow-r; visibility: hidden");
                    a.innerHTML = words;
                    li.setAttribute("data-name", words[1]);
+
                    li.appendChild(document.body.appendChild(a));
                    dictionary.appendChild(li);
                    $("#dictionary").listview("refresh");
@@ -167,14 +182,18 @@
          
          
          $('#dictionary li').live('click', function(e){
+             $.mobile.defaultPageTransition = "slide";
+         
              var key = $(this).text();
+             console.log("Key: "+key);
              value = key.split(",");
+             console.log("Value: "+value);
              value.splice(0,1);
              value = value + "";
          
-            synonymsOfWord = value.split(",");
+             synonymsOfWord = value.split(",");
          
-         
+         // Comment the following lines to see iOS Working
               $("#synonyms").show();
               $("#dictionary").hide();
          
