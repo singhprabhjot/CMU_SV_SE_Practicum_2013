@@ -26,7 +26,10 @@
       <div data-role="page" data-title="Dictionary" id="home">
          <!-- Main header of the list view page -->
          <div data-role="header" id="frontHeader">
+<<<<<<< HEAD
             
+=======
+>>>>>>> c55893be3093967b4c1ebf2b9e55f3be23bed8fd
             <h1>Synonymous</h1>
          </div>
          <!-- Div for showing synonyms -->
@@ -156,6 +159,7 @@
               var words = lines[readlines++].split(",");
               map[words[0]] = words;
 
+
               $("#dictionary").append('<li data-role="words[1]"><a>'+words[0]+'</a></li>');
               
          }
@@ -175,6 +179,7 @@
       <!--  -->
 
       <style>
+
          /* Swipe 2 required styles */
          .swipe {
            overflow: hidden;

@@ -126,7 +126,7 @@
              });
          
          });
-         var removeIndex = 0;
+
          $(window).scroll(function () 
          {
           if(readlines < lines.length)
@@ -134,7 +134,9 @@
              var words = lines[readlines++].split(",");
              for(var i = 0; i < 10; i++)
                  {
+
                   $("#dictionary li").eq(0).remove();
+
                   addElementsToList();
                  }
                 $("#dictionary").listview("refresh");
@@ -155,7 +157,9 @@
          function addElementsToList(){
               var words = lines[readlines++].split(",");
               map[words[0]] = words;
+
               $("#dictionary").append('<li data-role="words[1]"><a>'+words[0]+'</a></li>');
+
          }
          
          
