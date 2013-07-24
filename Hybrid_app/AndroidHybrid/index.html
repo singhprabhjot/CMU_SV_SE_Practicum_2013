@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Synonymous</title>
+      <meta content="width=device-width, initial-scale=1, maximum-scale=1" name= "viewport">
+      
+
+      <!-- jQuery Mobile File -->
+      <link href="_/css/jquery.mobile.css" rel="stylesheet">
+      <script src="_/js/jquery.js"></script>
+      <script src="_/js/jquery.mobile.js"></script>
+      <script src="Synonym.js"></script>
+    
+
+      <!-- For swipe functionality -->
+      <link href="css/main.css" type="text/css" rel="stylesheet" />
+      <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+      <script src='swipe/swipe.js'></script>
+      
+   </head>
+
+
+
+   <body onload="readText()">
+      <div data-role="page" data-title="Dictionary" id="home">
+         <!-- Main header of the list view page -->
+         <div data-role="header" id="frontHeader">
+            <h1>Synonymous</h1>
+         </div>
+         <!-- Div for showing synonyms -->
+         <div id="synonyms">
+            <div data-role="header">
+               <h1>Synonyms</h1>
+               <a data-rel="back" data-theme="a" id = "backButton">Back</a>
+               </a>
+            </div>
+            <div id="SynonymLabel" class="box">
+               <div id='mySwipe' style='max-width:500px;margin:0 auto' class='swipe'>
+                  <div class='swipe-wrap'>
+                     <div>Synonyms Will be Displayed Here</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- /header --> 
+         <ul data-click="listViewClick" data-role="listview" id="dictionary" data-inset="true">
+         </ul>
+      </div>
+      </div><!-- page -->
+
+
+      <!-- End of Page Div tags -->
+
+
+      <script type="text/javascript">
+         var value;
+         var lines;
+         var readlines = 0;   
+         var synonymsOfWord ;
+         var map = {};
+         
+         $(document).ready(function() {
+            $.mobile.defaultPageTransition = "slide";
+              $("#synonyms").hide();
+         });
+
+         window.mySwipe = Swipe(document.getElementById('mySwipe'), {
+         });
+
+         $('#backButton').click(function(){
+            showFrontPage();
+         });
+
+         $(".ui-dialog button").live("click", function() {   
+           $("[data-role='dialog']").dialog("close");    
+         });
+
+         $(document).on("mobileinit", function(){
+           $.mobile.defaultPageTransition = "slide";
+         });
+
+         $("#SynonymLabel").swipe( {
+           swipe:function(event, direction, distance, duration, fingerCount) {
+             if (direction == 'left')
+             {
+                mySwipe.next();
+             }
+             if(direction == 'right')
+             {      
+                mySwipe.prev();
+             }
+           },
+           //Default is 75px, set to 0 for demo so any distance triggers swipe
+            threshold:0
+         });    
+         
+         $('#dictionary li').live('click', function(e){
+            $.mobile.defaultPageTransition = "slide";
+         
+            var key = $(this).text();
+            key = key.trim();
+            value = map[key];
+            value = value + "";         
+            synonymsOfWord = value.split(",");
+            var synonymDiv = "";
+         
+            showSynonymPage();
+            // console.log(value);
+            // console.log(synonymsOfWord.length);
+            // console.log("Length "+synonymsOfWord[synonymsOfWord.length-1]);
+            for (var i = 1; i < synonymsOfWord.length - 1 ; i++) {
+              synonymDiv = synonymDiv+"<div>"+synonymsOfWord[i]+"</div>";
+            };
+            $(".swipe-wrap").html(synonymDiv);
+            var elem = document.getElementById('mySwipe');
+               window.mySwipe = Swipe(elem, {
+               // startSlide: 4,
+               // auto: 3000,
+               // continuous: true,
+               // disableScroll: true,
+               // stopPropagation: true,
+               // callback: function(index, element) {},
+               // transitionEnd: function(index, element) {}
+             });
+         
+         });
+         
+         $(window).scroll(function () 
+         {
+          if(readlines < lines.length)
+             {
+             var words = lines[readlines++].split(",");
+             for(var i = 0; i < 10; i++)
+                 {
+                  addElementsToList();
+                 }
+                 $("#dictionary").listview("refresh");
+           }
+         });
+
+         function showFrontPage(){
+              $("#synonyms").hide();
+              $("#dictionary").show();
+              $("#frontHeader").show();
+         }
+         function showSynonymPage(){
+              $("#synonyms").show();
+              $("#dictionary").hide();
+              $("#frontHeader").hide();
+         }
+     
+         function addElementsToList(){
+              var words = lines[readlines++].split(",");
+              map[words[0]] = words;
+              var li=document.createElement("li");
+              var a = document.createElement("a");
+              a.setAttribute("style","data-role: button; data-icon: arrow-r; visibility: hidden");
+    
+              var linkText = document.createTextNode(words[0]);
+              a.innerHTML = words;
+              li.setAttribute("data-name", words[1]);
+
+              // Setting href for iOS
+              var listElement = document.createElement("a");
+              listElement.innerHTML= words[0];
+              listElement.setAttribute("href", "#synonyms");
+              var span = document.createElement("span");
+              span.setAttribute("class","ui-icon ui-icon-arrow-r ui-icon-shadow");
+              li.appendChild(document.body.appendChild(listElement));
+              li.appendChild(document.body.appendChild(span));
+     
+  
+              li.appendChild(document.body.appendChild(a));
+              dictionary.appendChild(li);
+              
+         }
+         
+         
+         function readText(){
+          lines = str.split("\n");
+          for(var i = 0; i < 100; i++)
+               {
+                  addElementsToList();
+               }
+               $("#dictionary").listview("refresh");
+         }
+         
+      
+      </script>
+      <!--  -->
+
+      <style>
+
+         /* Swipe 2 required styles */
+         .swipe {
+           overflow: hidden;
+           visibility: hidden;
+           position: relative;
+         }
+         .swipe-wrap {
+           overflow: hidden;
+           position: relative;
+         }
+         .swipe-wrap > div {
+           float:left;
+           width:100%;
+           position: relative;
+         }
+         /* END required styles */
+      </style>
+
+        <!-- For android -->
+      <link href="android_look/android-holo-light.min.css" rel="stylesheet" />
+
+      <!-- android  ends-->
+   </body>
+</html>
