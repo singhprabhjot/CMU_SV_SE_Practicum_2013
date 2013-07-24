@@ -126,7 +126,7 @@
              });
          
          });
-         
+         var removeIndex = 0;
          $(window).scroll(function () 
          {
           if(readlines < lines.length)
@@ -134,6 +134,7 @@
              var words = lines[readlines++].split(",");
              for(var i = 0; i < 10; i++)
                  {
+                  $("#dictionary li").eq(0).remove();
                   addElementsToList();
                  }
                 $("#dictionary").listview("refresh");
@@ -154,27 +155,7 @@
          function addElementsToList(){
               var words = lines[readlines++].split(",");
               map[words[0]] = words;
-              var li=document.createElement("li");
-              var a = document.createElement("a");
-              a.setAttribute("style","data-role: button; data-icon: arrow-r; visibility: hidden");
-              var a = document.createElement("a");
-              var linkText = document.createTextNode(words[0]);
-              a.setAttribute("style","data-role: button; data-icon: arrow-r; visibility: hidden");
-              a.innerHTML = words;
-              li.setAttribute("data-name", words[1]);
-
-              // Setting href for iOS
-              var listElement = document.createElement("a");
-              listElement.innerHTML= words[0];
-              listElement.setAttribute("href", "#synonyms");
-              var span = document.createElement("span");
-              span.setAttribute("class","ui-icon ui-icon-arrow-r ui-icon-shadow");
-              li.appendChild(document.body.appendChild(listElement));
-              li.appendChild(document.body.appendChild(span));
-     
-  
-              li.appendChild(document.body.appendChild(a));
-              dictionary.appendChild(li);
+              $("#dictionary").append('<li data-role="words[1]"><a>'+words[0]+'</a></li>');
          }
          
          

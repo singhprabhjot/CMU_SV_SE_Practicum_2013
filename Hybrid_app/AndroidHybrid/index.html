@@ -26,6 +26,7 @@
       <div data-role="page" data-title="Dictionary" id="home">
          <!-- Main header of the list view page -->
          <div data-role="header" id="frontHeader">
+            
             <h1>Synonymous</h1>
          </div>
          <!-- Div for showing synonyms -->
@@ -133,6 +134,7 @@
              var words = lines[readlines++].split(",");
              for(var i = 0; i < 10; i++)
                  {
+                   $("#dictionary li").eq(0).remove();
                   addElementsToList();
                  }
                  $("#dictionary").listview("refresh");
@@ -153,26 +155,8 @@
          function addElementsToList(){
               var words = lines[readlines++].split(",");
               map[words[0]] = words;
-              var li=document.createElement("li");
-              var a = document.createElement("a");
-              a.setAttribute("style","data-role: button; data-icon: arrow-r; visibility: hidden");
-    
-              var linkText = document.createTextNode(words[0]);
-              a.innerHTML = words;
-              li.setAttribute("data-name", words[1]);
 
-              // Setting href for iOS
-              var listElement = document.createElement("a");
-              listElement.innerHTML= words[0];
-              listElement.setAttribute("href", "#synonyms");
-              var span = document.createElement("span");
-              span.setAttribute("class","ui-icon ui-icon-arrow-r ui-icon-shadow");
-              li.appendChild(document.body.appendChild(listElement));
-              li.appendChild(document.body.appendChild(span));
-     
-  
-              li.appendChild(document.body.appendChild(a));
-              dictionary.appendChild(li);
+              $("#dictionary").append('<li data-role="words[1]"><a>'+words[0]+'</a></li>');
               
          }
          
@@ -191,7 +175,6 @@
       <!--  -->
 
       <style>
-
          /* Swipe 2 required styles */
          .swipe {
            overflow: hidden;
