@@ -4,24 +4,16 @@
       <meta charset="utf-8">
       <title>Synonymous</title>
       <meta content="width=device-width, initial-scale=1, maximum-scale=1" name= "viewport">
-      
-
       <!-- jQuery Mobile File -->
       <link href="_/css/jquery.mobile.css" rel="stylesheet">
       <script src="_/js/jquery.js"></script>
       <script src="_/js/jquery.mobile.js"></script>
       <script src="Synonym.js"></script>
-    
-
       <!-- For swipe functionality -->
       <link href="css/main.css" type="text/css" rel="stylesheet" />
       <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
       <script src='swipe/swipe.js'></script>
-      
    </head>
-
-
-
    <body onload="readText()">
       <div data-role="page" data-title="Dictionary" id="home" >
          <!-- Main header of the list view page -->
@@ -32,8 +24,7 @@
          <div id="synonyms">
             <div data-role="header">
                <h1>Synonyms</h1>
-              <a data-rel="back" data-theme="a" id = "backButton" >Back</a>
-              
+               <a data-rel="back" data-theme="a" id = "backButton" >Back</a>
             </div>
             <div id="SynonymLabel" class="box">
                <div id='mySwipe' style='max-width:500px;margin:0 auto' class='swipe'>
@@ -48,39 +39,41 @@
          </ul>
       </div>
       </div><!-- page -->
-
-
       <!-- End of Page Div tags -->
-
-
       <script type="text/javascript">
          var value;
          var lines;
          var readlines = 0;   
          var synonymsOfWord ;
          var map = {};
+         var indexArray = [];
+         var currentIndex = 0;
+         var totalElementsLoaded = 0; 
+         var bufferValue = 50;
+         var intialLoadNumber = 100;
+         var words;
          
          $(document).ready(function() {
             $.mobile.defaultPageTransition = "slide";
               $("#synonyms").hide();
          });
-
+         
          window.mySwipe = Swipe(document.getElementById('mySwipe'), {
          });
-
+         
          $('#backButton').click(function(){
             showFrontPage();
             window.history.forward(); 
          });
-
+         
          $(".ui-dialog button").live("click", function() {   
            $("[data-role='dialog']").dialog("close");    
          });
-
+         
          $(document).on("mobileinit", function(){
            $.mobile.defaultPageTransition = "slide";
          });
-
+         
          $("#SynonymLabel").swipe( {
            swipe:function(event, direction, distance, duration, fingerCount) {
              if (direction == 'left')
@@ -107,9 +100,6 @@
             var synonymDiv = "";
          
             showSynonymPage();
-            // console.log(value);
-            // console.log(synonymsOfWord.length);
-            // console.log("Length "+synonymsOfWord[synonymsOfWord.length-1]);
             for (var i = 1; i < synonymsOfWord.length - 1 ; i++) {
               synonymDiv = synonymDiv+"<div>"+synonymsOfWord[i]+"</div>";
             };
@@ -126,23 +116,9 @@
              });
          
          });
-
-         $(window).scroll(function () 
-         {
-          if(readlines < lines.length)
-             {
-             var words = lines[readlines++].split(",");
-             for(var i = 0; i < 10; i++)
-                 {
-
-                  $("#dictionary li").eq(0).remove();
-
-                  addElementsToList();
-                 }
-                $("#dictionary").listview("refresh");
-           }
-         });
-
+         
+         
+         
          function showFrontPage(){
               $("#synonyms").hide();
               $("#dictionary").show();
@@ -153,50 +129,112 @@
               $("#dictionary").hide();
               $("#frontHeader").hide();
          }
-     
-         function addElementsToList(){
-              var words = lines[readlines++].split(",");
-              map[words[0]] = words;
-
-              $("#dictionary").append('<li data-role="words[1]"><a>'+words[0]+'</a></li>');
-
+         
+         
+         function addElementsToTopOfList(){
+          if (totalElementsLoaded >intialLoadNumber && currentIndex > 0 )
+          {
+              for(var i = 0; i < bufferValue; i++)
+                 {  
+                  $("#dictionary li").eq(intialLoadNumber-1).remove();
+                  currentIndex--;
+                  var currentWord = map[indexArray[currentIndex]];
+                  currentWord = currentWord + "";
+                  words = currentWord.split(",");
+                   $("#dictionary").prepend('<li data-role="words[1]"><a>'+words[0] +'</a></li>');
+                  // console.log("In TOP element CI:"+ currentIndex + " TI:" +totalElementsLoaded +" word:" + words[0]);
+                  }
+                $("#dictionary").listview("refresh");
+            }
+         } 
+         
+         
+         function addAndLoadNewElements(){
+            words = lines[readlines++].split(",");
+            map[words[0]] = words;
+            indexArray[totalElementsLoaded] = words[0];
+            totalElementsLoaded++;
+            currentIndex++;
+            $("#dictionary").append('<li data-role="words[1]"><a>'+words[0]+'</a></li>');
+            // console.log("In NEW element CI:"+ currentIndex + " TI:" +totalElementsLoaded +" word:" + words[0]);
+         
+         }
+         
+         function addElementsFromExisting(){
+           currentIndex++;
+           var currentWord = map[indexArray[currentIndex]];
+           currentWord = currentWord + "";
+                  words = currentWord.split(",");
+           $("#dictionary").append('<li data-role="words[1]"><a>'+words[0] +'</a></li>');      
+           // console.log("In Existing element CI:"+ currentIndex + " TI:" +totalElementsLoaded +" word:" + words[0]); 
+         }
+         
+         function addElementsToBottomOfList(){
+          // console.log("CI: "+currentIndex + " TI:"+totalElementsLoaded );
+            for(var i = 0; i < bufferValue; i++)
+             {  
+                $("#dictionary li").eq(0).remove();
+                if (currentIndex < totalElementsLoaded) 
+                {
+                   addElementsFromExisting();
+                }
+                else {
+                  addAndLoadNewElements();
+                }
+              }
+            $("#dictionary").listview("refresh");
          }
          
          
          function readText(){
           lines = str.split("\n");
-          for(var i = 0; i < 100; i++)
+          for(var i = 0; i < intialLoadNumber; i++)
                {
-                  addElementsToList();
+                  addAndLoadNewElements();
                }
                $("#dictionary").listview("refresh");
          }
+         
          window.history.forward();
-        function noBack() { window.history.forward(); }
-      
+         
+         function noBack() { window.history.forward(); }
+         
+         $(window).bind('mousewheel', function(event) {
+            if (event.originalEvent.wheelDelta >= 0) {
+                // console.log("backwardScroll");
+                addElementsToTopOfList();
+            }
+            else {
+              addElementsToBottomOfList();
+            }
+         });
+         
+         
+         
+         
+         
+         
       </script>
       <!--  -->
-
       <style>
          /* Swipe 2 required styles */
          .swipe {
-           overflow: hidden;
-           visibility: hidden;
-           position: relative;
+         overflow: hidden;
+         visibility: hidden;
+         position: relative;
          }
          .swipe-wrap {
-           overflow: hidden;
-           position: relative;
+         overflow: hidden;
+         position: relative;
          }
          .swipe-wrap > div {
-           float:left;
-           width:100%;
-           position: relative;
+         float:left;
+         width:100%;
+         position: relative;
          }
          /* END required styles */
       </style>
-
-        <!-- For ios -->
+      <!-- For ios -->
       <link href="ios_look/styles.css" rel="stylesheet" />
       <style>
          .ui-listview sup {
@@ -204,7 +242,6 @@
          color: #cc0000;
          }
       </style>
-
       <!-- iOS  ends-->
    </body>
 </html>
