@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
    <head>
+
       <meta charset="utf-8">
       <title>Synonymous</title>
       <meta content="width=device-width, initial-scale=1, maximum-scale=1" name= "viewport">
@@ -13,8 +14,9 @@
       <link href="css/main.css" type="text/css" rel="stylesheet" />
       <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
       <script src='swipe/swipe.js'></script>
+      
    </head>
-   <body onload="readText()">
+   <body onload="readText();" >
       <div data-role="page" data-title="Dictionary" id="home" >
          <!-- Main header of the list view page -->
          <div data-role="header" id="frontHeader">
@@ -52,6 +54,7 @@
          var bufferValue = 50;
          var intialLoadNumber = 100;
          var words;
+         var firstElementOfList;
          
          $(document).ready(function() {
             $.mobile.defaultPageTransition = "slide";
@@ -188,6 +191,7 @@
          
          function readText(){
           lines = str.split("\n");
+          firstElementOfList = lines[0].split(",")[0];
           for(var i = 0; i < intialLoadNumber; i++)
                {
                   addAndLoadNewElements();
@@ -200,12 +204,21 @@
          function noBack() { window.history.forward(); }
          
          $(window).bind('mousewheel', function(event) {
+            var topValue =  $("#dictionary li").eq(0).text();
+            topValue = topValue.trim();
+            if (topValue != firstElementOfList){
+               $("#frontHeader").hide();         
+            }
+            else{
+                $("#frontHeader").show();
+            }
+
+
             if (event.originalEvent.wheelDelta >= 0) {
-                // console.log("backwardScroll");
                 addElementsToTopOfList();
             }
             else {
-              addElementsToBottomOfList();
+                addElementsToBottomOfList();
             }
          });
          
@@ -242,6 +255,12 @@
          color: #cc0000;
          }
       </style>
+
+
+
+
+
+
       <!-- iOS  ends-->
    </body>
 </html>
