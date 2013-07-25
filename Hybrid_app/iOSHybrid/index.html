@@ -19,7 +19,7 @@
    <body onload="readText();" >
       <div data-role="page" data-title="Dictionary" id="home" >
          <!-- Main header of the list view page -->
-         <div data-role="header" id="frontHeader" data-position="fixed">
+         <div data-role="header" id="frontHeader" >
             <h1>Synonymous</h1>
          </div>
          <!-- Div for showing synonyms -->
@@ -29,7 +29,7 @@
                <a data-rel="back" data-theme="a" id = "backButton" >Back</a>
             </div>
             <div id="SynonymLabel" class="box">
-               <div id='mySwipe' style='max-width:500px;margin:0 auto' class='swipe'>
+               <div id='mySwipe' style='max-width:1200px;margin:0 auto' class='swipe'>
                   <div class='swipe-wrap'>
                      <div>Synonyms Will be Displayed Here</div>
                   </div>
@@ -213,10 +213,11 @@
             }
          });
          
-         
-         
-         
-         
+
+          var heightOfWindow = $(window).height(); 
+          var widthOfWindow = $(window).width();
+          $(".box").css("width", widthOfWindow);
+          $(".box").css("height", heightOfWindow);             
          
       </script>
       <!--  -->
