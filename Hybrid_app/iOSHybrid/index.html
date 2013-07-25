@@ -19,7 +19,7 @@
    <body onload="readText();" >
       <div data-role="page" data-title="Dictionary" id="home" >
          <!-- Main header of the list view page -->
-         <div data-role="header" id="frontHeader">
+         <div data-role="header" id="frontHeader" data-position="fixed">
             <h1>Synonymous</h1>
          </div>
          <!-- Div for showing synonyms -->
@@ -204,15 +204,6 @@
          function noBack() { window.history.forward(); }
          
          $(window).bind('mousewheel', function(event) {
-            var topValue =  $("#dictionary li").eq(0).text();
-            topValue = topValue.trim();
-            if (topValue != firstElementOfList){
-               $("#frontHeader").hide();         
-            }
-            else{
-                $("#frontHeader").show();
-            }
-
 
             if (event.originalEvent.wheelDelta >= 0) {
                 addElementsToTopOfList();
