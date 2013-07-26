@@ -10,9 +10,10 @@
 	var suiteTwo = new Benchmark.Suite;	
 	var suiteThree = new Benchmark.Suite;
 	var suiteFour = new Benchmark.Suite;
+	var totalTestNum = 18; 
 	var testNumber = 0;
 	var toggle;
-	var rotate = 4;
+	var factor = 4;
 	var context = motion_canvas.getContext( '2d' );
 
 	suiteOne.add('Box Shadow', function() {
@@ -56,7 +57,7 @@
 		  image.style.visibility="";
 		  image.style.width="284px";
 	    image.style.height="213px";
-	    rotate=5;
+	    factor=5;
 		testNumber++;
 	    compileResults(event.target, "one");
 	})
@@ -76,7 +77,7 @@
 	.on('cycle', function(event, bench) {
 	  console.log(event.target);
 
-		  rotate=5;
+		  factor=5;
 	  	testNumber++;
 	    compileResults(event.target, "two");
 	})
@@ -85,33 +86,33 @@
 	});
 
 	suiteThree.add("Transform: Translate(x,y)", function(){
-	  rotate+=1;
-	  block.style.transform = "translate("+rotate+"px,"+rotate+"px)";
-	  block.style.webkitTransform = "translate("+rotate+"px,"+rotate+"px)"; 
-	  if(rotate>=19)
-	    rotate=1;
+	  factor+=1;
+	  block.style.transform = "translate("+factor+"px,"+factor+"px)";
+	  block.style.webkitTransform = "translate("+factor+"px,"+factor+"px)"; 
+	  if(factor>=19)
+	    factor=1;
 
 	})
 	.add("Transform: scale(x,y)", function(){
-	  rotate+=0.1;
-	  block.style.transform = "scale("+rotate+","+rotate+")";
-	  block.style.webkitTransform = "scale("+rotate+","+rotate+")"; 
-	  if(rotate>=6)
-	    rotate=0.5;
+	  factor+=0.1;
+	  block.style.transform = "scale("+factor+","+factor+")";
+	  block.style.webkitTransform = "scale("+factor+","+factor+")"; 
+	  if(factor>=6)
+	    factor=0.5;
 
 	})
 	.add("Transform: Rotate(angle)", function(){
-			rotate+=2;
-			block.style.transform = "rotate("+rotate+"deg)"; 
-			block.style.webkitTransform = "rotate("+rotate+"deg)"; 
+			factor+=2;
+			block.style.transform = "factor("+factor+"deg)"; 
+			block.style.webkitTransform = "factor("+factor+"deg)"; 
 
 	})
 	.add("Transform: Skew(x-angle, y-angle)", function(){
-	  rotate+=2;
-	  block.style.transform = "skew("+rotate+"deg,"+rotate+"deg)"; 
-	  block.style.webkitTransform = "skew("+rotate+"deg,"+rotate+"deg)"; 
-	  if(rotate>=25)
-	    rotate=5;
+	  factor+=2;
+	  block.style.transform = "skew("+factor+"deg,"+factor+"deg)"; 
+	  block.style.webkitTransform = "skew("+factor+"deg,"+factor+"deg)"; 
+	  if(factor>=25)
+	    factor=5;
 
 	})
 	.add("Transition: width, height", function(){
@@ -121,7 +122,7 @@
 	.on('cycle', function(event, bench) {
 	  console.log(event.target);
 
-		  rotate=4;
+		  factor=4;
 	  	testNumber++;
 	    compileResults(event.target, "three");
 	})
@@ -141,17 +142,25 @@
 	  requestAnimFrame( animate );
 	  Block.className = "animationBlock";
 	})
+	.add('DOM Relayout', function(){
+		relayout.style.display="block";
+		factor+=2;
+		Block.style.width=5+factor+"px";
+		Block.style.height=5+factor+"px";
+		console.log($('#relayout').offset({relativeTo: "body"})['0'].offsetTop)
+	})
 	.on('cycle', function(event, bench) {
-	  console.log(event.target);
-	  Block.style.position = "relative";
-		  Block.className = "movingBlock";
+	  	console.log(event.target);
+	  	Block.style.position = "relative";
+		Block.className = "movingBlock";
 	    testNumber++;
 	    compileResults(event.target, "four");
+	    factor = 0;
 	})
 	.on('complete', function() {
 	  checkTestCompletion();
 	});
-
+	drawRelayoutBlocks();
 	window.requestAnimFrame = (function(){
       	return  window.requestAnimationFrame       || 
         window.webkitRequestAnimationFrame || 
@@ -178,3 +187,13 @@
 
 	}
 	function animate(){}
+
+	function drawRelayoutBlocks(){
+		relayout.style.display="none";
+		for(var i = 0; i< totalTestNum; i++){
+			var blocks = document.createElement('div');
+			blocks.className='relayoutBlock';
+			relayout.appendChild(blocks);
+		}
+
+	}

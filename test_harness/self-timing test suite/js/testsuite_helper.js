@@ -34,7 +34,7 @@
 		results['device_name'] = document.getElementById("device_name").value;
 		if(results['device_name'] != ""){
 			error.style.display = "none";
-			var url = "http://appception-tahoe.herokuapp.com/environments";
+			var url = "http://0.0.0.0:3000/environments";
        		//POST, and log the result
   			$.post(url, results, function(data){console.log(data);}, "json");
 		}else{
@@ -166,7 +166,7 @@
     	testResults.style.display = "none";
 	}
 	function checkTestCompletion(){
-		if(results['tests'].length == 17){
+		if(results['tests'].length == 18){
 			$('#upload').attr("disabled", false);
 			$('#result').attr("disabled", false);
 		}

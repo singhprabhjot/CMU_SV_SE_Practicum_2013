@@ -30,6 +30,18 @@ td
 	position:relative;
 
 }
+.relayoutBlock{
+
+	width:45px;
+	height:45px;
+	background:blue;
+	position:relative;
+	margin: 2px 2px 2px 2px;
+	float: left;
+
+
+}
+
 .movingBlock2 {
 	width:80px;
 	height:80px;
