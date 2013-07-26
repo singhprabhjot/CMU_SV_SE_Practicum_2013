@@ -34,7 +34,7 @@
 		results['device_name'] = document.getElementById("device_name").value;
 		if(results['device_name'] != ""){
 			error.style.display = "none";
-			var url = "http://0.0.0.0:3000/environments";
+			var url = "http://appception-tahoe.herokuapp.com/environments";
        		//POST, and log the result
   			$.post(url, results, function(data){console.log(data);}, "json");
 		}else{
