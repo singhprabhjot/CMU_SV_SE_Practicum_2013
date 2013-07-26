@@ -24,12 +24,12 @@
          </div>
          <!-- Div for showing synonyms -->
          <div id="synonyms">
-            <div data-role="header">
+            <div data-role="header" >
                <h1>Synonyms</h1>
                <a data-rel="back" data-theme="a" id = "backButton" >Back</a>
             </div>
-            <div id="SynonymLabel" class="box">
-               <div id='mySwipe' style='max-width:1200px;margin:0 auto' class='swipe'>
+            <div id="SynonymLabel" class="box" >
+               <div id='mySwipe' class='swipe'>
                   <div class='swipe-wrap'>
                      <div>Synonyms Will be Displayed Here</div>
                   </div>
@@ -64,6 +64,7 @@
          window.mySwipe = Swipe(document.getElementById('mySwipe'), {
          });
          
+         // Forward the history to show the page again
          $('#backButton').click(function(){
             showFrontPage();
             window.history.forward(); 
@@ -77,6 +78,7 @@
            $.mobile.defaultPageTransition = "slide";
          });
          
+         // Make synonyms swipe in the circular loop
          $("#SynonymLabel").swipe( {
            swipe:function(event, direction, distance, duration, fingerCount) {
              if (direction == 'left')
@@ -92,6 +94,8 @@
             threshold:0
          });    
          
+
+         // Show synonyms based on what element is clicked
          $('#dictionary li').live('click', function(e){
             $.mobile.defaultPageTransition = "slide";
          
@@ -121,12 +125,14 @@
          });
          
          
-         
+         // Show the words list
          function showFrontPage(){
               $("#synonyms").hide();
               $("#dictionary").show();
               $("#frontHeader").show();
          }
+
+         // Show the synonyms
          function showSynonymPage(){
               $("#synonyms").show();
               $("#dictionary").hide();
@@ -134,6 +140,7 @@
          }
          
          
+         // Load elements on the top of the list
          function addElementsToTopOfList(){
           if (totalElementsLoaded >intialLoadNumber && currentIndex > 0 )
           {
@@ -151,7 +158,7 @@
             }
          } 
          
-         
+         // Load elements first time from the file
          function addAndLoadNewElements(){
             words = lines[readlines++].split(",");
             map[words[0]] = words;
@@ -163,6 +170,7 @@
          
          }
          
+         // Load elements that are already loaded once in the memory
          function addElementsFromExisting(){
            currentIndex++;
            var currentWord = map[indexArray[currentIndex]];
@@ -172,6 +180,8 @@
            // console.log("In Existing element CI:"+ currentIndex + " TI:" +totalElementsLoaded +" word:" + words[0]); 
          }
          
+
+         // Add element to the bottom of the list based upon if it is already loaded or not.
          function addElementsToBottomOfList(){
           // console.log("CI: "+currentIndex + " TI:"+totalElementsLoaded );
             for(var i = 0; i < bufferValue; i++)
@@ -189,6 +199,7 @@
          }
          
          
+         // Load words  when the page is load first
          function readText(){
           lines = str.split("\n");
           firstElementOfList = lines[0].split(",")[0];
@@ -199,21 +210,21 @@
                $("#dictionary").listview("refresh");
          }
          
+
          window.history.forward();
          
          function noBack() { window.history.forward(); }
          
-         $(window).bind('mousewheel', function(event) {
-
-            if (event.originalEvent.wheelDelta >= 0) {
-                addElementsToTopOfList();
+         // Add words in the list based on if it scrolled up or down
+          $(window).on('DOMMouseScroll mousewheel', function (e) {
+            if(e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < 0) { //alternative options for wheelData: wheelDeltaX & wheelDeltaY
+                  addElementsToBottomOfList();
+            } else {
+               addElementsToTopOfList();
             }
-            else {
-                addElementsToBottomOfList();
-            }
-         });
+          });
          
-
+          // Make the size of scrollable area same as window
           var heightOfWindow = $(window).height(); 
           var widthOfWindow = $(window).width();
           $(".box").css("width", widthOfWindow);
