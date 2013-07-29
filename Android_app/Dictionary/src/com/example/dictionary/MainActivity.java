@@ -74,7 +74,8 @@ OnItemClickListener   {
                 listItems);
        
         mainListView.setClickable(true);
-        mainListView.setAdapter(adapter);  
+        mainListView.setAdapter(adapter); 
+        mainListView.setPadding(30, 0, 0, 0);
        
         try 
         {
