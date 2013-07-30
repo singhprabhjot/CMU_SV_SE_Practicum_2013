@@ -70,34 +70,33 @@
 //TO-DO: Simplify this code
 	function checkCSSsupport(suiteNumber){
 		var isSupported = true;
-		
 		if(suiteNumber == "one"){
 			switch(testNumber){
-				case 0:
+				case 1:
 				if (typeof document.body.style.boxShadow == "undefined")
 					isSupported = false;
 				break;
-				case 1:
+				case 2:
 					if (typeof document.body.style.borderRadius == "undefined")
 						isSupported = false;
 				break;
-				case 2:
-					if (typeof document.body.style.boxShadow == "undefined" && typeof document.body.style.borderRadius == "undefined")
-						isSupported = false;
-				break;
 				case 3:
-					if (typeof document.body.style.opacity == "undefined")
+					if (typeof document.body.style.boxShadow == "undefined" || typeof document.body.style.borderRadius == "undefined")
 						isSupported = false;
 				break;
 				case 4:
-					if (typeof document.body.style.visibility == "undefined")
+					if (typeof document.body.style.opacity == "undefined")
 						isSupported = false;
 				break;
 				case 5:
-					if (typeof document.body.style.width == "undefined" && typeof document.body.style.height == "undefined")
+					if (typeof document.body.style.visibility == "undefined")
 						isSupported = false;
 				break;
 				case 6:
+					if (typeof document.body.style.width == "undefined" || typeof document.body.style.height == "undefined")
+						isSupported = false;
+				break;
+				case 7:
 					if (typeof document.body.style.overflow == "undefined")
 						isSupported = false;
 				break;
@@ -105,12 +104,12 @@
 		}
 		if(suiteNumber == "two"){
 			switch(testNumber){
-				case 0:
+				case 1:
 				var elem = document.createElement('canvas');
 				if (!(elem.getContext && elem.getContext('2d')))
 					isSupported = false;
 				break;
-				case 1:
+				case 2:
 					var elem = document.createElement('canvas');
 					if (!(elem.getContext && elem.getContext('2d')))
 						isSupported = false;
@@ -119,13 +118,9 @@
 		}
 		if(suiteNumber == "three"){
 			switch(testNumber){
-				case 0:
+				case 1:
 				if (typeof document.body.style.transform == "undefined" && typeof document.body.style.webkitTransform == "undefined")
 					isSupported = false;
-				break;
-				case 1:
-					if (typeof document.body.style.transform == "undefined" && typeof document.body.style.webkitTransform == "undefined")
-						isSupported = false;
 				break;
 				case 2:
 					if (typeof document.body.style.transform == "undefined" && typeof document.body.style.webkitTransform == "undefined")
@@ -136,23 +131,28 @@
 						isSupported = false;
 				break;
 				case 4:
+					if (typeof document.body.style.transform == "undefined" && typeof document.body.style.webkitTransform == "undefined")
+						isSupported = false;
+				break;
+				case 5:
 					if (typeof document.body.style.transition == "undefined" && typeof document.body.style.webkitTransition == "undefined")
 						isSupported = false;
 				break;
 			}
 		}
 		if(suiteNumber == "four"){
+
 			switch(testNumber){
-				case 0:
-				if (typeof document.body.style.animationName == "undefined" && typeof document.body.style.position == "undefined")
+				case 1:
+				if (typeof document.body.style.animationName == "undefined" || typeof document.body.style.position == "undefined")
 					isSupported = false;
 				break;
-				case 1:
-					if (typeof document.body.style.animationName == "undefined" && typeof document.body.style.position == "undefined")
+				case 2:
+					if (typeof document.body.style.animationName == "undefined" || typeof document.body.style.position == "undefined")
 						isSupported = false;
 				break;
-				case 2:
-					if (typeof document.body.style.animationName == "undefined" && typeof document.body.style.position == "undefined" && typeof window.requestAnimationFrame == "undefined")
+				case 3:
+					if (typeof document.body.style.animationName == "undefined" || typeof document.body.style.position == "undefined" || (typeof window.requestAnimationFrame == "undefined" && typeof window.webkitRequestAnimationFrame == "undefined"))
 						isSupported = false;
 				break;
 			}
