@@ -144,15 +144,15 @@
 
 			switch(testNumber){
 				case 1:
-				if (typeof document.body.style.animationName == "undefined" || typeof document.body.style.position == "undefined")
+				if ((typeof document.body.style.animationName == "undefined" && typeof document.body.style.webkitAnimationName == "undefined")|| typeof document.body.style.position == "undefined")
 					isSupported = false;
 				break;
 				case 2:
-					if (typeof document.body.style.animationName == "undefined" || typeof document.body.style.position == "undefined")
+					if ((typeof document.body.style.animationName == "undefined" && typeof document.body.style.webkitAnimationName == "undefined")|| typeof document.body.style.position == "undefined")
 						isSupported = false;
 				break;
 				case 3:
-					if (typeof document.body.style.animationName == "undefined" || typeof document.body.style.position == "undefined" || (typeof window.requestAnimationFrame == "undefined" && typeof window.webkitRequestAnimationFrame == "undefined"))
+					if ((typeof document.body.style.animationName == "undefined" && typeof document.body.style.webkitAnimationName == "undefined") || typeof document.body.style.position == "undefined" || (typeof window.requestAnimationFrame == "undefined" && typeof window.webkitRequestAnimationFrame == "undefined"))
 						isSupported = false;
 				break;
 			}
