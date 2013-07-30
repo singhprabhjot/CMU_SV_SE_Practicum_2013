@@ -16,6 +16,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
 import android.gesture.GestureOverlayView.OnGestureListener;
+import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -61,6 +62,7 @@ public class Synonyms extends Activity
         	WordNumber++;
             tv.setTextSize(getResources().getDimension(R.dimen.textsize));
             tv.setId(WordNumber+5);
+            tv.setTextColor(Color.GRAY);
             tv.setGravity(Gravity.CENTER);
             ViewList.add(tv);
             
