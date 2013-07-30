@@ -170,6 +170,7 @@
 	.on('cycle', function(event, bench) {
 	  	console.log(event.target);
 	  	Block.style.position = "relative";
+	  	Block.className = "movingBlock";
 	    compileResults(event.target);
 	    factor = 0;
 	})
