@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html>
    <head>
-
       <meta charset="utf-8">
       <title>Synonymous</title>
       <meta content="width=device-width, initial-scale=1, maximum-scale=1" name= "viewport">
+      
+
       <!-- jQuery Mobile File -->
-      <link href="_/css/jquery.mobile.css" rel="stylesheet">
-      <script src="_/js/jquery.js"></script>
-      <script src="_/js/jquery.mobile.js"></script>
+      <link href="files/css/jquery.mobile.css" rel="stylesheet">
+      <script src="files/js/jquery.js"></script>
+      <script src="files/js/jquery.mobile.js"></script>
       <script src="Synonym.js"></script>
+    
+
       <!-- For swipe functionality -->
       <link href="css/main.css" type="text/css" rel="stylesheet" />
       <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
       <script src='swipe/swipe.js'></script>
       
    </head>
-   <body onload="readText();" >
+
+
+
+   <body onload="readText()">
       <div data-role="page" data-title="Dictionary" id="home" >
          <!-- Main header of the list view page -->
          <div data-role="header" id="frontHeader" >
@@ -24,12 +30,13 @@
          </div>
          <!-- Div for showing synonyms -->
          <div id="synonyms">
-            <div data-role="header" >
+            <div data-role="header">
                <h1>Synonyms</h1>
-               <a data-rel="back" data-theme="a" id = "backButton" >Back</a>
+              <a data-rel="back" data-theme="a" id = "backButton" data-postion="fixed">Back</a>
+              
             </div>
-            <div id="SynonymLabel" class="box" >
-               <div id='mySwipe' class='swipe'>
+            <div id="SynonymLabel" class="box">
+               <div id='mySwipe' style='margin:0 auto' class='swipe'>
                   <div class='swipe-wrap'>
                      <div>Synonyms Will be Displayed Here</div>
                   </div>
@@ -41,44 +48,39 @@
          </ul>
       </div>
       </div><!-- page -->
+
+
       <!-- End of Page Div tags -->
+
+
       <script type="text/javascript">
          var value;
          var lines;
          var readlines = 0;   
          var synonymsOfWord ;
          var map = {};
-         var indexArray = [];
-         var currentIndex = 0;
-         var totalElementsLoaded = 0; 
-         var bufferValue = 50;
-         var intialLoadNumber = 100;
-         var words;
-         var firstElementOfList;
          
          $(document).ready(function() {
             $.mobile.defaultPageTransition = "slide";
               $("#synonyms").hide();
          });
-         
+
          window.mySwipe = Swipe(document.getElementById('mySwipe'), {
          });
-         
-         // Forward the history to show the page again
-         $('#backButton').click(function(){
+
+         $('#backButton').click(function()
+         {
             showFrontPage();
-            window.history.forward(); 
          });
-         
+
          $(".ui-dialog button").live("click", function() {   
            $("[data-role='dialog']").dialog("close");    
          });
-         
+
          $(document).on("mobileinit", function(){
            $.mobile.defaultPageTransition = "slide";
          });
-         
-         // Make synonyms swipe in the circular loop
+
          $("#SynonymLabel").swipe( {
            swipe:function(event, direction, distance, duration, fingerCount) {
              if (direction == 'left')
@@ -94,8 +96,6 @@
             threshold:0
          });    
          
-
-         // Show synonyms based on what element is clicked
          $('#dictionary li').live('click', function(e){
             $.mobile.defaultPageTransition = "slide";
          
@@ -107,7 +107,10 @@
             var synonymDiv = "";
          
             showSynonymPage();
-            for (var i = 1; i < synonymsOfWord.length - 1 ; i++) {
+            console.log(value);
+            // console.log(synonymsOfWord.length);
+            // console.log("Length "+synonymsOfWord[synonymsOfWord.length-1]);
+            for (var i = 0; i < synonymsOfWord.length  ; i++) {
               synonymDiv = synonymDiv+"<div>"+synonymsOfWord[i]+"</div>";
             };
             $(".swipe-wrap").html(synonymDiv);
@@ -121,136 +124,87 @@
                // callback: function(index, element) {},
                // transitionEnd: function(index, element) {}
              });
-         
+            window.resize();
          });
          
-         
-         // Show the words list
+         $(window).scroll(function () 
+         {
+          if(readlines < lines.length)
+             {
+             var words = lines[readlines++].split(",");
+             for(var i = 0; i < 10; i++)
+                 {
+                  addElementsToList();
+                 }
+                $("#dictionary").listview("refresh");
+           }
+         });
+
          function showFrontPage(){
               $("#synonyms").hide();
               $("#dictionary").show();
               $("#frontHeader").show();
-         }
 
-         // Show the synonyms
+
+         }
          function showSynonymPage(){
               $("#synonyms").show();
               $("#dictionary").hide();
               $("#frontHeader").hide();
          }
-         
-         
-         // Load elements on the top of the list
-         function addElementsToTopOfList(){
-          if (totalElementsLoaded >intialLoadNumber && currentIndex > 0 )
-          {
-              for(var i = 0; i < bufferValue; i++)
-                 {  
-                  $("#dictionary li").eq(intialLoadNumber-1).remove();
-                  currentIndex--;
-                  var currentWord = map[indexArray[currentIndex]];
-                  currentWord = currentWord + "";
-                  words = currentWord.split(",");
-                   $("#dictionary").prepend('<li data-role="words[1]"><a>'+words[0] +'</a></li>');
-                  // console.log("In TOP element CI:"+ currentIndex + " TI:" +totalElementsLoaded +" word:" + words[0]);
-                  }
-                $("#dictionary").listview("refresh");
-            }
-         } 
-         
-         // Load elements first time from the file
-         function addAndLoadNewElements(){
-            words = lines[readlines++].split(",");
-            map[words[0]] = words;
-            indexArray[totalElementsLoaded] = words[0];
-            totalElementsLoaded++;
-            currentIndex++;
-            $("#dictionary").append('<li data-role="words[1]"><a>'+words[0]+'</a></li>');
-            // console.log("In NEW element CI:"+ currentIndex + " TI:" +totalElementsLoaded +" word:" + words[0]);
-         
-         }
-         
-         // Load elements that are already loaded once in the memory
-         function addElementsFromExisting(){
-           currentIndex++;
-           var currentWord = map[indexArray[currentIndex]];
-           currentWord = currentWord + "";
-                  words = currentWord.split(",");
-           $("#dictionary").append('<li data-role="words[1]"><a>'+words[0] +'</a></li>');      
-           // console.log("In Existing element CI:"+ currentIndex + " TI:" +totalElementsLoaded +" word:" + words[0]); 
-         }
-         
+     
+         function addElementsToList(){
+              var words = lines[readlines++].split(",");
+              map[words[0]] = words;
+                $("#dictionary").append('<li data-role="words[1]"><a>'+words[0]+'</a></li>');
 
-         // Add element to the bottom of the list based upon if it is already loaded or not.
-         function addElementsToBottomOfList(){
-          // console.log("CI: "+currentIndex + " TI:"+totalElementsLoaded );
-            for(var i = 0; i < bufferValue; i++)
-             {  
-                $("#dictionary li").eq(0).remove();
-                if (currentIndex < totalElementsLoaded) 
-                {
-                   addElementsFromExisting();
-                }
-                else {
-                  addAndLoadNewElements();
-                }
-              }
-            $("#dictionary").listview("refresh");
          }
          
          
-         // Load words  when the page is load first
          function readText(){
           lines = str.split("\n");
-          firstElementOfList = lines[0].split(",")[0];
-          for(var i = 0; i < intialLoadNumber; i++)
+          for(var i = 0; i < 100; i++)
                {
-                  addAndLoadNewElements();
+                  addElementsToList();
                }
                $("#dictionary").listview("refresh");
+                 window.resize();
          }
-         
 
          window.history.forward();
-         
-         function noBack() { window.history.forward(); }
-         
-         // Add words in the list based on if it scrolled up or down
-          $(window).on('DOMMouseScroll mousewheel', function (e) {
-            if(e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < 0) { //alternative options for wheelData: wheelDeltaX & wheelDeltaY
-                  addElementsToBottomOfList();
-            } else {
-               addElementsToTopOfList();
-            }
-          });
-         
-          // Make the size of scrollable area same as window
+        function noBack() { window.history.forward(); }
+
           var heightOfWindow = $(window).height(); 
+          heightOfWindow = heightOfWindow -60;
           var widthOfWindow = $(window).width();
           $(".box").css("width", widthOfWindow);
-          $(".box").css("height", heightOfWindow);             
-         
+          $(".box").css("height",heightOfWindow);  
+          $(".box").css("margin-top","36px");   
+          $(".box").css("max-width",widthOfWindow);
+      
       </script>
       <!--  -->
+
       <style>
          /* Swipe 2 required styles */
          .swipe {
-         overflow: hidden;
-         visibility: hidden;
-         position: relative;
+           overflow: hidden;
+           visibility: hidden;
+           position: relative;
          }
          .swipe-wrap {
-         overflow: hidden;
-         position: relative;
+           overflow: hidden;
+           position: relative;
          }
          .swipe-wrap > div {
-         float:left;
-         width:100%;
-         position: relative;
+           float:left;
+           width:100%;
+           position: relative;
          }
          /* END required styles */
       </style>
-      <!-- For ios -->
+
+        <!-- For ios -->
       <link href="ios_look/styles.css" rel="stylesheet" />
       <style>
          .ui-listview sup {
@@ -258,11 +212,6 @@
          color: #cc0000;
          }
       </style>
-
-
-
-
-
 
       <!-- iOS  ends-->
    </body>
