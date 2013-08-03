@@ -10,6 +10,6 @@
     <color name="ExpandGroupBackground">#FF7C7C7C</color>
 
     <string name="title_activity_synonyms">Synonyms</string>
-    <dimen name="textsize">80sp</dimen>
+    <dimen name="textsize">50sp</dimen>
 	<dimen name="liSize">30sp</dimen>
 </resources>

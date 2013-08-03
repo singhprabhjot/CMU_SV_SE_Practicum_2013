@@ -19,6 +19,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -91,9 +92,11 @@ OnItemClickListener   {
 		        String[] RowData = line.split(",");
 		        TextView tvs = new TextView(this);
 		        tvs.setTypeface(typeBold);
-	            tvs.setText(RowData[0]);
-		        listItems.add(tvs.getText().toString());
-		        hm.put(RowData[0],RowData);
+	            tvs.setText(capitalize(RowData[0]));
+	            
+	            listItems.add(tvs.getText().toString());
+	            
+		        hm.put(capitalize(RowData[0]),RowData);
 		        line = buffreader.readLine();
 		        count++;
 		    }
@@ -200,5 +203,11 @@ OnItemClickListener   {
 
     }
 
+    private String capitalize(String word)
+    {
+    	StringBuilder sb = new StringBuilder(word); // one StringBuilder object  
+    	sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));  
+    	return sb.toString(); // one String object
+    }
     
 }
