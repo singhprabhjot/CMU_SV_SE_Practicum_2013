@@ -18,6 +18,7 @@ import android.gesture.GestureOverlayView;
 import android.gesture.GestureOverlayView.OnGestureListener;
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
+import android.text.InputType;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -58,7 +59,7 @@ public class Synonyms extends Activity
         for(int i=0;i<=nPages;i++)
         {	
         	TextView tv=new TextView(this);
-        	tv.setText(textArray[i]);
+        	tv.setText(capitalize(textArray[i].toString()));
         	WordNumber++;
             tv.setTextSize(getResources().getDimension(R.dimen.textsize));
             tv.setId(WordNumber+5);
@@ -130,6 +131,12 @@ public class Synonyms extends Activity
 			
 			});
 		}
+	private String capitalize(String word)
+    {
+    	StringBuilder sb = new StringBuilder(word); // one StringBuilder object  
+    	sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));  
+    	return sb.toString(); // one String object
+    }
 
 }
 
