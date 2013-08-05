@@ -7,9 +7,9 @@
       
 
       <!-- jQuery Mobile File -->
-      <link href="_/css/jquery.mobile.css" rel="stylesheet">
-      <script src="_/js/jquery.js"></script>
-      <script src="_/js/jquery.mobile.js"></script>
+      <link href="files/css/jquery.mobile.css" rel="stylesheet">
+      <script src="files/js/jquery.js"></script>
+      <script src="files/js/jquery.mobile.js"></script>
       <script src="Synonym.js"></script>
     
 
@@ -26,6 +26,7 @@
       <div data-role="page" data-title="Dictionary" id="home">
          <!-- Main header of the list view page -->
          <div data-role="header" id="frontHeader">
+
             <h1>Synonymous</h1>
          </div>
          <!-- Div for showing synonyms -->
@@ -95,7 +96,7 @@
             threshold:0
          });    
          
-         $('#dictionary li').live('click', function(e){
+                 $('#dictionary li').live('click', function(e){
             $.mobile.defaultPageTransition = "slide";
          
             var key = $(this).text();
@@ -106,10 +107,10 @@
             var synonymDiv = "";
          
             showSynonymPage();
-            // console.log(value);
+            console.log(value);
             // console.log(synonymsOfWord.length);
             // console.log("Length "+synonymsOfWord[synonymsOfWord.length-1]);
-            for (var i = 1; i < synonymsOfWord.length - 1 ; i++) {
+            for (var i = 0; i < synonymsOfWord.length  ; i++) {
               synonymDiv = synonymDiv+"<div>"+synonymsOfWord[i]+"</div>";
             };
             $(".swipe-wrap").html(synonymDiv);
@@ -123,7 +124,7 @@
                // callback: function(index, element) {},
                // transitionEnd: function(index, element) {}
              });
-         
+            window.resize();
          });
          
          $(window).scroll(function () 
@@ -135,7 +136,7 @@
                  {
                   addElementsToList();
                  }
-                 $("#dictionary").listview("refresh");
+                $("#dictionary").listview("refresh");
            }
          });
 
@@ -143,6 +144,8 @@
               $("#synonyms").hide();
               $("#dictionary").show();
               $("#frontHeader").show();
+
+
          }
          function showSynonymPage(){
               $("#synonyms").show();
@@ -153,27 +156,8 @@
          function addElementsToList(){
               var words = lines[readlines++].split(",");
               map[words[0]] = words;
-              var li=document.createElement("li");
-              var a = document.createElement("a");
-              a.setAttribute("style","data-role: button; data-icon: arrow-r; visibility: hidden");
-    
-              var linkText = document.createTextNode(words[0]);
-              a.innerHTML = words;
-              li.setAttribute("data-name", words[1]);
+                $("#dictionary").append('<li data-role="words[1]"><a>'+words[0]+'</a></li>');
 
-              // Setting href for iOS
-              var listElement = document.createElement("a");
-              listElement.innerHTML= words[0];
-              listElement.setAttribute("href", "#synonyms");
-              var span = document.createElement("span");
-              span.setAttribute("class","ui-icon ui-icon-arrow-r ui-icon-shadow");
-              li.appendChild(document.body.appendChild(listElement));
-              li.appendChild(document.body.appendChild(span));
-     
-  
-              li.appendChild(document.body.appendChild(a));
-              dictionary.appendChild(li);
-              
          }
          
          
@@ -184,14 +168,24 @@
                   addElementsToList();
                }
                $("#dictionary").listview("refresh");
+                 window.resize();
          }
-         
+
+         window.history.forward();
+        function noBack() { window.history.forward(); }
+
+          var heightOfWindow = $(window).height(); 
+          heightOfWindow = heightOfWindow -60;
+          var widthOfWindow = $(window).width();
+          $(".box").css("width", widthOfWindow);
+          $(".box").css("height",heightOfWindow);  
+          $(".box").css("margin-top","36px");   
+          $(".box").css("max-width",widthOfWindow);
       
       </script>
       <!--  -->
 
       <style>
-
          /* Swipe 2 required styles */
          .swipe {
            overflow: hidden;

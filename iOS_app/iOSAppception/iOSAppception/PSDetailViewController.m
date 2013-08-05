@@ -50,7 +50,7 @@ bool firstTimePageCalled = YES;
     [self configureOldViews];
     [self configureScrollView];
     if (self.labelWord) {
-        self.title = [@"Synonyms for: " stringByAppendingString:self.labelWord];
+        self.title = [@"Synonyms" stringByAppendingString:@""];
     }
     
     if (self.detailItem) {

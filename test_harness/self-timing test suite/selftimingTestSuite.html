@@ -28,8 +28,8 @@
 				<tr>
 					<td>	
 						<div class="default">
-							Test 1. Box-Shadow, Border-Radius, Radius and Shadow, Opacity, Visibility, Image Resize, Overflow:Scroll &nbsp;&nbsp;
-							<button type="button" name="test" onclick="suiteOne.run({async: true}); testNumber = 0; return false;">Run Test 1</button><br/>
+							Test 1: Box-Shadow, Border-Radius, Radius and Shadow, Opacity, Visibility, Image Resize, Overflow:Scroll &nbsp;&nbsp;
+							<button type="button" name="test" onclick="suiteOne.run({async: true}); return false;">Run Test 1</button><br/>
 							<img id="image" src="teamTahoe.jpg" class="image_style">
 						</div>
 						<br/>
@@ -37,7 +37,7 @@
 					<td>
 						<div class="default">
 						    Test 2: Canvas: Object rendering and motion
-						    <button type="button" name="test" onclick="suiteTwo.run({async: true}); testNumber = 0; return false;">Run Test 2</button><br/>
+						    <button type="button" name="test" onclick="suiteTwo.run({async: true}); return false;">Run Test 2</button><br/>
 						    <canvas id="canvas"></canvas>
 						    <br/>
 						    <canvas id="motion_canvas" width="100px" height="100px"></canvas>
@@ -50,7 +50,7 @@
 					<td>
 						<div class="default">
 							Test 3: CSS Transforms: Translate, Scale, Rotate and Skew 
-						    <button type="button" name="test" onclick="suiteThree.run({async: true}); testNumber = 0; return false;">Run Test 3</button><br/>
+						    <button type="button" name="test" onclick="suiteThree.run({async: true}); return false;">Run Test 3</button><br/>
 						    <div id="block" class="movingBlock"></div>
 						    Transitions: width and height
 						    <div id="block2" class="movingBlock2"></div>
@@ -59,9 +59,12 @@
 					</td>
 					<td>
 						<div class="default">
-							Test 4: Animation - position:fixed, position:relative and requestAnimationFrame 
-						    <button type="button" name="test" onclick="suiteFour.run({async: true}); testNumber = 0; return false;">Run Test 4</button><br/>
-						    <div id="Block" class="movingBlock"></div>    
+							Test 4: Animation &amp; Relayout - position:fixed, position:relative, requestAnimationFrame, <br/>DOM Re-layout 
+						    <button type="button" name="test" onclick="suiteFour.run({async: true}); return false;">Run Test 4</button><br/>
+						    <div id="Block" class="movingBlock"></div>  
+						    <div id ="relayout">
+						    	
+						    </div>  
 			    		</div>
 						<br/>
 					</td>
