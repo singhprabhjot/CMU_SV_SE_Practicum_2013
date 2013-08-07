@@ -1,18 +1,19 @@
 #CMUSV_SE_Practicum_2013
 
-## Repo Organization
-
-###Tests
-
-Tests are versioned in the /tests directory. They are grouped in the following ways:
-
-1. by weekly topics:
-	Tests written for one weekly topic are in the directory `tests/week#`, i.e `tests/week1` for week 1 tests.
-	
-2. by testing architecure, i.e: self-iming, CDT timeline, etc ...
-	
-Tests are deployed [here](http://ec2-54-215-135-205.us-west-1.compute.amazonaws.com/se_practicum_13/).
+This repository houses the work produced in the project: ***Mobile App Performance Challenge: Native vs. HTML5 Hybrid Apps***. The contributors are: [Aristide](https://github.com/Aristide1o), [Madhok](https://github.com/madhok), [Prabhjot](https://github.com/singhprabhjot), [Rashmi](https://github.com/RashmiDR), and [Shama](https://github.com/shamahoque).We carried out the project in the context of the [CMU Silicon Valley software engineering](http://www.cmu.edu/silicon-valley/academics/software-engineering/) [practicum course](http://www.cmu.edu/silicon-valley/academics/courses/96710.html); the sponsor is [Appception inc](http://www.appception.com/).
 
 
-###Other Components
-Other components such as the CDT timeline parser, or mobile apps are versioned in their respective directories, i.e: /test_harness, /iOS_app, /Hybrid_app, /Android_app, etc …
+##Goals
+The project has two goals:
+
+1. benchmarking performance of HTML5 UI operations and optimizations in mobile user agents.
+2. comparison of appearance , behavior, and performance of Hybrid Apps (WebView, UIWebView) versus Native Apps (iOS, Android).
+
+## Project components
+The project has five major components, each covering a specific scope within the gols. The componets - and their scope - are:
+
+- Android Native App: This is Synonymous, a thesaurus app built for comparison with a hybrid counterpart. It's documented in its specific [README file]().
+- iOS Native App:
+- Android & iOS iOS Hybrid App:
+- Self-timing tests suite: 
+- Chrome developer tools timeline test suite:

@@ -1,1 +1,0 @@
-####The Javascript for `add_nodes_on_scroll.html` needs to change to make the operation work because it has hardcoded values that depend on the browser window size. 
