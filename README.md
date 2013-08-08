@@ -12,8 +12,8 @@ The project has two goals:
 ## Project components
 The project has five major components, each covering a specific scope within the gols. The componets - and their scope - are:
 
-- Android Native App: This is Synonymous, a thesaurus app built for comparison with a hybrid counterpart. It's documented in its specific [README file]().
-- iOS Native App:
-- Android & iOS iOS Hybrid App:
-- Self-timing tests suite: 
-- Chrome developer tools timeline test suite:
+- Android Native App: This is Synonymous, a thesaurus app built for comparison with a hybrid counterpart. It's documented in its specific [README file](https://github.com/Aristide1o/CMUSV_SE_Practicum_2013/blob/master/Android_App/README.md).
+- iOS Native App: This is Synonymous, a thesaurus app built for comparison with a hybrid counterpart. It's documented in its specific [README file](https://github.com/Aristide1o/CMUSV_SE_Practicum_2013/blob/master/iOS_app/README.md).
+- Hybrid App (Android & iOS): This is Synonymous, a thesaurus app built for comparison with a hybrid counterpart. It's documented in its specific [README file](https://github.com/Aristide1o/CMUSV_SE_Practicum_2013/blob/master/Hybrid_app/README.md).
+- Self-timing tests suite: This is a set of benchmarking tests exectuted in mobile browsers, and hybrid containers. It's documented in its specific [README file](https://github.com/Aristide1o/CMUSV_SE_Practicum_2013/blob/master/test_harness/self-timing%20test%20suite/readme.md).
+- Chrome developer tools timeline test suite: This is a set of benchmarking tests measuring the speed of basic style elements in Google chrome ccross several Android devices, a mac laptop, and a windows 7 laptop. It's documented in its specific [README file](https://github.com/Aristide1o/CMUSV_SE_Practicum_2013/blob/master/test_harness/CDT_timeline_test_suite/README.md).
