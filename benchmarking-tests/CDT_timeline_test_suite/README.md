@@ -7,7 +7,7 @@ To capture benchmarking data:
 1. Open the HTML file in a browser
 2. Start the chrome developer tools (CDT) and go to the timeline tab
 3. Click the record circle
-4. Click the `Start test` button; wwait until the message that the test is finished appears
+4. Click the `Start test` button; wait until the message that the test is finished appears
 5. Click the circle of the timeline again to stop the recording
 6. Right click in the timeline window, and save the timeline dump file
 7. Follow the instructions in the benchmarking [tests harness README](https://github.com/Aristide1o/appception-tahoe/blob/master/README.md) to process the timeline dump file.
