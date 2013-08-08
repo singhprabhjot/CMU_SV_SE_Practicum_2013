@@ -10,7 +10,7 @@ The project has two goals:
 2. comparison of appearance , behavior, and performance of Hybrid Apps (WebView, UIWebView) versus Native Apps (iOS, Android).
 
 ## Project components
-The project has five major components, each covering a specific scope within the gols. The componets - and their scope - are:
+The project has five major components, each covering a specific scope within the goals. The componets - and their scope - are:
 
 - Android Native App: This is Synonymous, a thesaurus app built for comparison with a hybrid counterpart. It's documented in its specific [README file](https://github.com/Aristide1o/CMUSV_SE_Practicum_2013/blob/master/Android_App/README.md).
 - iOS Native App: This is Synonymous, a thesaurus app built for comparison with a hybrid counterpart. It's documented in its specific [README file](https://github.com/Aristide1o/CMUSV_SE_Practicum_2013/blob/master/iOS_app/README.md).
