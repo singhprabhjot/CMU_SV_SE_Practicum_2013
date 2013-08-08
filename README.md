@@ -1,4 +1,4 @@
-#CMUSV_SE_Practicum_2013
+#CMUSV SE Practicum 2013
 
 This repository houses the work produced in the project: ***Mobile App Performance Challenge: Native vs. HTML5 Hybrid Apps***. The contributors are: [Aristide](https://github.com/Aristide1o), [Madhok](https://github.com/madhok), [Prabhjot](https://github.com/singhprabhjot), [Rashmi](https://github.com/RashmiDR), and [Shama](https://github.com/shamahoque).We carried out the project in the context of the [CMU Silicon Valley software engineering](http://www.cmu.edu/silicon-valley/academics/software-engineering/) [practicum course](http://www.cmu.edu/silicon-valley/academics/courses/96710.html); the sponsor is [Appception inc](http://www.appception.com/).
 
