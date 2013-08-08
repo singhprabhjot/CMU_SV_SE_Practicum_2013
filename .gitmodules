@@ -1,0 +1,3 @@
+[submodule "benchmarking-tests/benchmarking-tests-harness"]
+	path = benchmarking-tests/benchmarking-tests-harness
+	url = https://github.com/Aristide1o/appception-tahoe.git
