@@ -1,6 +1,6 @@
 This application contains a list of 17000+ english words and their synonyms.
 
-The Android appication is developed as a list View. Initially, on Application start,
+The Android appication is developed as a ListView. Initially, on Application start,
 500 words are loaded in the list view. The words are loaded as the users scrolls down. 
 Every scroll event will add 100 words to the list.
 
